@@ -1,0 +1,52 @@
+export default function DashboardPage() {
+  const stats = [
+    { label: 'Total Sales', value: '$125,430', change: '+12.5%' },
+    { label: 'Orders', value: '1,234', change: '+8.2%' },
+    { label: 'Customers', value: '5,678', change: '+15.3%' },
+    { label: 'Revenue', value: '$89,120', change: '+10.1%' },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="container mx-auto px-4">
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">Dashboard</h1>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {stats.map((stat, index) => (
+            <div key={index} className="bg-white rounded-lg shadow-md p-6">
+              <p className="text-gray-600 text-sm mb-2">{stat.label}</p>
+              <p className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</p>
+              <p className="text-green-600 text-sm">{stat.change} from last month</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-6">
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h2 className="text-xl font-semibold mb-4">Sales Overview</h2>
+            <div className="h-64 bg-gray-100 rounded flex items-center justify-center">
+              <span className="text-gray-400">Chart Placeholder</span>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
+            <div className="space-y-4">
+              {[1, 2, 3, 4, 5].map((item) => (
+                <div key={item} className="flex items-center justify-between border-b pb-3 last:border-0">
+                  <div>
+                    <p className="font-medium text-gray-900">Order #{1000 + item}</p>
+                    <p className="text-sm text-gray-600">2 hours ago</p>
+                  </div>
+                  <p className="font-semibold text-green-600">$299.99</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+

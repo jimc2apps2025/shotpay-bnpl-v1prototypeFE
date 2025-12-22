@@ -1,0 +1,3 @@
+# This file ensures the products directory is tracked by git
+# Add your product images here with the filenames matching data/products.ts
+
