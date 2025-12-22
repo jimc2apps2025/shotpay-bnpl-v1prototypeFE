@@ -1,3 +1,5 @@
+import SalesChart from '@/components/SalesChart';
+
 export default function DashboardPage() {
   const stats = [
     { label: 'Total Sales', value: '$125,430', change: '+12.5%' },
@@ -24,9 +26,7 @@ export default function DashboardPage() {
         <div className="grid lg:grid-cols-2 gap-6">
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">Sales Overview</h2>
-            <div className="h-64 bg-gray-100 rounded flex items-center justify-center">
-              <span className="text-gray-400">Chart Placeholder</span>
-            </div>
+            <SalesChart />
           </div>
 
           <div className="bg-white rounded-lg shadow-md p-6">
