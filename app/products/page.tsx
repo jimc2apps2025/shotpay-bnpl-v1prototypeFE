@@ -24,11 +24,11 @@ export default function ProductsPage() {
   return (
     <div className="min-h-screen bg-[#FCFCFC] py-8">
       <div className="container mx-auto px-4">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-[#0C0D0C] mb-4 uppercase">Products</h1>
+        <div className="mb-6 md:mb-8">
+          <h1 className="text-2xl md:text-3xl font-bold text-[#0C0D0C] mb-3 md:mb-4 uppercase">Products</h1>
           
           {/* Search and Filter */}
-          <div className="flex flex-col md:flex-row gap-4 mb-6">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-4 mb-4 md:mb-6">
             <div className="relative flex-1">
               <input
                 type="text"
@@ -47,10 +47,10 @@ export default function ProductsPage() {
               </svg>
             </div>
             
-            <div className="flex gap-2">
+            <div className="flex gap-2 overflow-x-auto pb-2 -mb-2">
               <button
                 onClick={() => setSelectedCategory('all')}
-                className={`px-4 py-2 rounded-lg transition-colors font-medium ${
+                className={`px-3 md:px-4 py-2 rounded-lg transition-colors font-medium whitespace-nowrap text-sm md:text-base ${
                   selectedCategory === 'all'
                     ? 'bg-[#4C773B] text-white'
                     : 'bg-white text-[#0C0D0C] border border-[#192B17]/20 hover:bg-[#192B17]/5'
@@ -60,7 +60,7 @@ export default function ProductsPage() {
               </button>
               <button
                 onClick={() => setSelectedCategory('firearm')}
-                className={`px-4 py-2 rounded-lg transition-colors font-medium ${
+                className={`px-3 md:px-4 py-2 rounded-lg transition-colors font-medium whitespace-nowrap text-sm md:text-base ${
                   selectedCategory === 'firearm'
                     ? 'bg-[#4C773B] text-white'
                     : 'bg-white text-[#0C0D0C] border border-[#192B17]/20 hover:bg-[#192B17]/5'
@@ -70,7 +70,7 @@ export default function ProductsPage() {
               </button>
               <button
                 onClick={() => setSelectedCategory('ammunition')}
-                className={`px-4 py-2 rounded-lg transition-colors font-medium ${
+                className={`px-3 md:px-4 py-2 rounded-lg transition-colors font-medium whitespace-nowrap text-sm md:text-base ${
                   selectedCategory === 'ammunition'
                     ? 'bg-[#4C773B] text-white'
                     : 'bg-white text-[#0C0D0C] border border-[#192B17]/20 hover:bg-[#192B17]/5'

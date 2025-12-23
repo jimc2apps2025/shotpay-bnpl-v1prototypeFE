@@ -124,14 +124,14 @@ export default function FFLDealersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FCFCFC] py-8">
+    <div className="min-h-screen bg-[#FCFCFC] py-4 sm:py-8">
       <div className="container mx-auto px-4">
-        <h1 className="text-3xl font-bold text-[#0C0D0C] mb-8 uppercase">FFL Dealers</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#0C0D0C] mb-4 sm:mb-8 uppercase">FFL Dealers</h1>
         
-        <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow-md p-6 mb-4 border border-[#192B17]/10">
-              <div className="relative h-[600px] bg-[#192B17]/5 rounded-lg overflow-hidden">
+        <div className="grid lg:grid-cols-3 gap-4 sm:gap-8">
+          <div className="lg:col-span-2 order-2 lg:order-1">
+            <div className="bg-white rounded-lg shadow-md p-3 sm:p-6 mb-4 border border-[#192B17]/10">
+              <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] bg-[#192B17]/5 rounded-lg overflow-hidden">
                 <DealerMap
                   dealers={dealers}
                   selectedDealerId={selectedDealer?.id}
@@ -139,21 +139,21 @@ export default function FFLDealersPage() {
                   center={mapCenter}
                   zoom={userLocation ? 12 : 10}
                 />
-                <div className="absolute top-4 left-4 bg-white px-4 py-2 rounded-lg shadow-md z-[1000] border border-[#192B17]/10">
+                <div className="absolute top-2 sm:top-4 left-2 sm:left-4 bg-white px-3 sm:px-4 py-2 rounded-lg shadow-md z-[1000] border border-[#192B17]/10">
                   <input
                     type="text"
                     placeholder="Search location..."
-                    className="outline-none w-64 text-[#0C0D0C]"
+                    className="outline-none w-48 sm:w-64 text-sm sm:text-base text-[#0C0D0C]"
                   />
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6 border border-[#192B17]/10">
-              <h2 className="text-xl font-bold mb-4 text-[#0C0D0C]">Nearby Dealers</h2>
-              <div className="space-y-4 max-h-[600px] overflow-y-auto">
+          <div className="lg:col-span-1 order-1 lg:order-2">
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 border border-[#192B17]/10">
+              <h2 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-[#0C0D0C]">Nearby Dealers</h2>
+              <div className="space-y-3 sm:space-y-4 max-h-[400px] sm:max-h-[500px] lg:max-h-[600px] overflow-y-auto">
                 {dealers.map((dealer) => (
                   <div
                     key={dealer.id}

@@ -47,24 +47,24 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50 py-8">
+      <div className="min-h-screen bg-[#FCFCFC] py-4 sm:py-8">
         <div className="container mx-auto px-4 max-w-7xl">
           {/* Breadcrumb */}
-          <nav className="mb-6 text-sm">
-            <ol className="flex items-center space-x-2 text-gray-600">
-              <li><Link href="/" className="hover:text-gray-900">Home</Link></li>
+          <nav className="mb-4 sm:mb-6 text-xs sm:text-sm">
+            <ol className="flex items-center space-x-2 text-[#192B17] overflow-x-auto">
+              <li><Link href="/" className="hover:text-[#0C0D0C]">Home</Link></li>
               <li>/</li>
-              <li><Link href="/products" className="hover:text-gray-900">Products</Link></li>
+              <li><Link href="/products" className="hover:text-[#0C0D0C]">Products</Link></li>
               <li>/</li>
-              <li><span className="text-gray-900">{product.name}</span></li>
+              <li><span className="text-[#0C0D0C] truncate max-w-[150px] sm:max-w-none">{product.name}</span></li>
             </ol>
           </nav>
 
-          <div className="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+          <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6 sm:mb-8 border border-[#192B17]/10">
             <div className="md:flex">
               {/* Product Image */}
               <div className="md:w-1/2">
-                <div className="aspect-square relative bg-gray-100">
+                <div className="aspect-square relative bg-[#192B17]/5">
                   <ProductImage
                     src={product.image}
                     alt={product.name}
@@ -87,27 +87,27 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
               </div>
 
               {/* Product Info */}
-              <div className="md:w-1/2 p-6 md:p-8">
-                <div className="mb-3">
-                  <span className="text-sm text-gray-500 uppercase tracking-wide">{product.category}</span>
+              <div className="md:w-1/2 p-4 sm:p-6 md:p-8">
+                <div className="mb-2 sm:mb-3">
+                  <span className="text-xs sm:text-sm text-[#4C773B] uppercase tracking-wide font-bold">{product.category}</span>
                 </div>
-                <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{product.name}</h1>
-                <div className="flex items-baseline space-x-3 mb-6">
-                  <p className="text-4xl font-bold text-green-600">${product.price.toFixed(2)}</p>
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0C0D0C] mb-3 sm:mb-4">{product.name}</h1>
+                <div className="flex items-baseline space-x-3 mb-4 sm:mb-6">
+                  <p className="text-3xl sm:text-4xl font-bold text-[#4C773B]">${product.price.toFixed(2)}</p>
                   {product.inStock && (
-                    <span className="text-sm text-green-600 bg-green-50 px-2 py-1 rounded">In Stock</span>
+                    <span className="text-xs sm:text-sm text-[#4C773B] bg-[#4C773B]/10 px-2 py-1 rounded font-medium">In Stock</span>
                   )}
                 </div>
 
                 {/* Quantity Selector */}
                 {product.inStock && (
-                  <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Quantity</label>
+                  <div className="mb-4 sm:mb-6">
+                    <label className="block text-sm font-medium text-[#192B17] mb-2">Quantity</label>
                     <div className="flex items-center space-x-3">
                       <button
                         onClick={() => handleQuantityChange(quantity - 1)}
                         disabled={quantity <= 1}
-                        className="w-10 h-10 rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                        className="w-11 h-11 sm:w-10 sm:h-10 rounded-lg border border-[#192B17]/20 hover:bg-[#192B17]/5 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center touch-manipulation"
                       >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
@@ -119,12 +119,12 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                         max="10"
                         value={quantity}
                         onChange={(e) => handleQuantityChange(parseInt(e.target.value) || 1)}
-                        className="w-20 text-center border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                        className="w-20 text-center border border-[#192B17]/20 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4C773B] text-[#0C0D0C]"
                       />
                       <button
                         onClick={() => handleQuantityChange(quantity + 1)}
                         disabled={quantity >= 10}
-                        className="w-10 h-10 rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                        className="w-11 h-11 sm:w-10 sm:h-10 rounded-lg border border-[#192B17]/20 hover:bg-[#192B17]/5 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center touch-manipulation"
                       >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -135,19 +135,19 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 )}
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4 sm:mb-6">
                   <button
                     onClick={handleAddToCart}
                     disabled={!product.inStock}
-                    className={`flex-1 py-3 px-6 rounded-lg transition-all font-semibold ${
+                    className={`flex-1 py-3 sm:py-3 px-6 rounded-lg transition-all font-bold touch-manipulation ${
                       product.inStock
-                        ? 'bg-green-600 text-white hover:bg-green-700 shadow-md hover:shadow-lg transform hover:-translate-y-0.5'
-                        : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                        ? 'bg-[#4C773B] text-white hover:bg-[#192B17] shadow-md hover:shadow-lg transform hover:-translate-y-0.5'
+                        : 'bg-[#192B17]/20 text-[#192B17]/60 cursor-not-allowed'
                     }`}
                   >
                     {product.inStock ? 'Add to Cart' : 'Out of Stock'}
                   </button>
-                  <button className="px-6 py-3 border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-semibold">
+                  <button className="px-6 py-3 border-2 border-[#192B17]/20 rounded-lg hover:bg-[#192B17]/5 transition-colors font-bold text-[#0C0D0C] touch-manipulation">
                     Save for Later
                   </button>
                 </div>

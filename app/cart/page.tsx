@@ -48,9 +48,9 @@ export default function CartPage() {
 
   return (
     <>
-      <div className="min-h-screen bg-[#FCFCFC] py-8">
+      <div className="min-h-screen bg-[#FCFCFC] py-4 sm:py-8">
         <div className="container mx-auto px-4 max-w-6xl">
-          <h1 className="text-3xl font-bold text-[#0C0D0C] mb-8 uppercase">Shopping Cart</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#0C0D0C] mb-4 sm:mb-8 uppercase">Shopping Cart</h1>
 
           {items.length === 0 ? (
             <div className="bg-white rounded-lg shadow-md p-12 text-center border border-[#192B17]/10">
@@ -80,9 +80,9 @@ export default function CartPage() {
             <div className="lg:grid lg:grid-cols-3 lg:gap-8">
               {/* Cart Items */}
               <div className="lg:col-span-2">
-                <div className="bg-white rounded-lg shadow-md p-6 mb-4 border border-[#192B17]/10">
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-xl font-semibold">Cart Items ({items.length})</h2>
+                <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-4 border border-[#192B17]/10">
+                  <div className="flex items-center justify-between mb-4 sm:mb-6">
+                    <h2 className="text-lg sm:text-xl font-bold">Cart Items ({items.length})</h2>
                     <button
                       onClick={() => {
                         items.forEach((item) => handleRemove(item.id));
@@ -96,14 +96,14 @@ export default function CartPage() {
                     {items.map((item, index) => (
                       <div
                         key={item.id}
-                        className={`flex items-center justify-between border-b pb-4 transition-all ${
+                        className={`flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-[#192B17]/10 pb-4 transition-all gap-4 ${
                           removingId === item.id ? 'opacity-0 scale-95' : 'opacity-100'
                         }`}
                         style={{ animationDelay: `${index * 50}ms` }}
                       >
                         <div className="flex items-center space-x-4 flex-1 min-w-0">
                           <Link href={`/products/${item.id}`} className="flex-shrink-0">
-                            <div className="w-20 h-20 bg-gray-200 rounded-lg overflow-hidden hover:opacity-80 transition-opacity">
+                            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-200 rounded-lg overflow-hidden hover:opacity-80 transition-opacity">
                               <Image
                                 src={getProductImage(item.id)}
                                 alt={item.name}
@@ -131,22 +131,22 @@ export default function CartPage() {
                           </div>
                         </div>
 
-                        <div className="flex items-center space-x-4 ml-4">
+                        <div className="flex items-center justify-between sm:justify-end sm:ml-4 gap-3 sm:gap-4">
                           {/* Quantity Controls */}
-                          <div className="flex items-center space-x-2 border border-gray-300 rounded-lg">
+                          <div className="flex items-center space-x-2 border border-[#192B17]/20 rounded-lg">
                             <button
                               onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                              className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 transition-colors rounded-l-lg"
+                              className="w-9 h-9 sm:w-8 sm:h-8 flex items-center justify-center hover:bg-[#192B17]/5 transition-colors rounded-l-lg touch-manipulation"
                               aria-label="Decrease quantity"
                             >
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
                               </svg>
                             </button>
-                            <span className="w-12 text-center font-medium">{item.quantity}</span>
+                            <span className="w-10 sm:w-12 text-center font-medium text-sm sm:text-base">{item.quantity}</span>
                             <button
                               onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                              className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 transition-colors rounded-r-lg"
+                              className="w-9 h-9 sm:w-8 sm:h-8 flex items-center justify-center hover:bg-[#192B17]/5 transition-colors rounded-r-lg touch-manipulation"
                               aria-label="Increase quantity"
                             >
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -156,8 +156,8 @@ export default function CartPage() {
                           </div>
 
                           {/* Price */}
-                          <div className="text-right min-w-[100px]">
-                            <p className="font-bold text-[#0C0D0C]">
+                          <div className="text-right sm:min-w-[100px]">
+                            <p className="font-bold text-[#0C0D0C] text-base sm:text-lg">
                               ${(item.price * item.quantity).toFixed(2)}
                             </p>
                             {item.quantity > 1 && (
@@ -170,7 +170,7 @@ export default function CartPage() {
                           {/* Remove Button */}
                           <button
                             onClick={() => handleRemove(item.id)}
-                            className="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors"
+                            className="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors touch-manipulation"
                             aria-label="Remove item"
                           >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -201,9 +201,9 @@ export default function CartPage() {
               </div>
 
               {/* Order Summary */}
-              <div className="lg:col-span-1 mt-8 lg:mt-0">
-                <div className="bg-white rounded-lg shadow-md p-6 sticky top-4 border border-[#192B17]/10">
-                  <h2 className="text-xl font-bold mb-4 text-[#0C0D0C]">Order Summary</h2>
+              <div className="lg:col-span-1 mt-6 sm:mt-8 lg:mt-0">
+                <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 lg:sticky lg:top-4 border border-[#192B17]/10">
+                  <h2 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-[#0C0D0C]">Order Summary</h2>
                   <div className="space-y-3 mb-6">
                     <div className="flex justify-between text-[#192B17]">
                       <span>Subtotal</span>

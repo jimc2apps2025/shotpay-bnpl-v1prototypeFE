@@ -39,15 +39,15 @@ export default function DealerDetailsModal({ dealer, isOpen, onClose }: DealerDe
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-2 sm:p-4"
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center">
-          <h2 className="text-2xl font-bold text-gray-900">{dealer.name}</h2>
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 pr-2">{dealer.name}</h2>
           <button
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600 transition-colors"
@@ -69,7 +69,7 @@ export default function DealerDetailsModal({ dealer, isOpen, onClose }: DealerDe
           </button>
         </div>
 
-        <div className="p-6 space-y-6">
+        <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
           {/* Location Info */}
           <div>
             <h3 className="text-lg font-semibold text-gray-900 mb-3">Location</h3>
@@ -186,19 +186,19 @@ export default function DealerDetailsModal({ dealer, isOpen, onClose }: DealerDe
           )}
 
           {/* Actions */}
-          <div className="flex gap-4 pt-4 border-t border-gray-200">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 border-t border-gray-200">
             <a
               href={`https://www.google.com/maps/dir/?api=1&destination=${dealer.lat},${dealer.lng}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-center"
+              className="flex-1 bg-blue-600 text-white px-4 py-3 sm:py-2 rounded-lg hover:bg-blue-700 transition-colors text-center font-medium touch-manipulation"
             >
               Get Directions
             </a>
             {dealer.phone && (
               <a
                 href={`tel:${dealer.phone}`}
-                className="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors text-center"
+                className="flex-1 bg-gray-200 text-gray-800 px-4 py-3 sm:py-2 rounded-lg hover:bg-gray-300 transition-colors text-center font-medium touch-manipulation"
               >
                 Call Now
               </a>
