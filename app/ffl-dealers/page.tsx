@@ -7,11 +7,11 @@ import DealerDetailsModal from '@/components/DealerDetailsModal';
 // Dynamically import the map component to avoid SSR issues with Leaflet
 const DealerMap = dynamic(() => import('@/components/DealerMap'), {
   ssr: false,
-  loading: () => (
-    <div className="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
-      <span className="text-gray-400">Loading map...</span>
-    </div>
-  ),
+      loading: () => (
+        <div className="w-full h-full bg-[#192B17]/5 rounded-lg flex items-center justify-center">
+          <span className="text-[#192B17]/60">Loading map...</span>
+        </div>
+      ),
 });
 
 interface Dealer {
@@ -124,14 +124,14 @@ export default function FFLDealersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-[#FCFCFC] py-8">
       <div className="container mx-auto px-4">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">FFL Dealers</h1>
+        <h1 className="text-3xl font-bold text-[#0C0D0C] mb-8 uppercase">FFL Dealers</h1>
         
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow-md p-6 mb-4">
-              <div className="relative h-[600px] bg-gray-200 rounded-lg overflow-hidden">
+            <div className="bg-white rounded-lg shadow-md p-6 mb-4 border border-[#192B17]/10">
+              <div className="relative h-[600px] bg-[#192B17]/5 rounded-lg overflow-hidden">
                 <DealerMap
                   dealers={dealers}
                   selectedDealerId={selectedDealer?.id}
@@ -139,11 +139,11 @@ export default function FFLDealersPage() {
                   center={mapCenter}
                   zoom={userLocation ? 12 : 10}
                 />
-                <div className="absolute top-4 left-4 bg-white px-4 py-2 rounded-lg shadow-md z-[1000]">
+                <div className="absolute top-4 left-4 bg-white px-4 py-2 rounded-lg shadow-md z-[1000] border border-[#192B17]/10">
                   <input
                     type="text"
                     placeholder="Search location..."
-                    className="outline-none w-64"
+                    className="outline-none w-64 text-[#0C0D0C]"
                   />
                 </div>
               </div>
@@ -151,26 +151,26 @@ export default function FFLDealersPage() {
           </div>
 
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-semibold mb-4">Nearby Dealers</h2>
+            <div className="bg-white rounded-lg shadow-md p-6 border border-[#192B17]/10">
+              <h2 className="text-xl font-bold mb-4 text-[#0C0D0C]">Nearby Dealers</h2>
               <div className="space-y-4 max-h-[600px] overflow-y-auto">
                 {dealers.map((dealer) => (
                   <div
                     key={dealer.id}
-                    className={`border-b pb-4 last:border-0 cursor-pointer transition-colors hover:bg-gray-50 p-3 rounded-lg ${
-                      selectedDealer?.id === dealer.id ? 'bg-blue-50 border-blue-200' : ''
+                    className={`border-b border-[#192B17]/10 pb-4 last:border-0 cursor-pointer transition-colors hover:bg-[#192B17]/5 p-3 rounded-lg ${
+                      selectedDealer?.id === dealer.id ? 'bg-[#4C773B]/10 border-[#4C773B]/30' : ''
                     }`}
                     onClick={() => handleViewDetails(dealer)}
                   >
-                    <h3 className="font-semibold text-gray-900 mb-1">{dealer.name}</h3>
-                    <p className="text-sm text-gray-600 mb-2">{dealer.address}</p>
-                    <p className="text-sm text-green-600 font-medium mb-2">{dealer.distance} away</p>
+                    <h3 className="font-bold text-[#0C0D0C] mb-1">{dealer.name}</h3>
+                    <p className="text-sm text-[#192B17] mb-2">{dealer.address}</p>
+                    <p className="text-sm text-[#4C773B] font-bold mb-2">{dealer.distance} away</p>
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         handleViewDetails(dealer);
                       }}
-                      className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                      className="text-[#4C773B] hover:text-[#192B17] text-sm font-bold"
                     >
                       View Details →
                     </button>

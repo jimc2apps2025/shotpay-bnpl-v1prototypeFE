@@ -210,3 +210,4 @@ export default function DealerDetailsModal({ dealer, isOpen, onClose }: DealerDe
   );
 }
 
+

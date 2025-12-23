@@ -9,36 +9,36 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-[#FCFCFC] py-8">
       <div className="container mx-auto px-4">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Dashboard</h1>
+        <h1 className="text-3xl font-bold text-[#0C0D0C] mb-8 uppercase">Dashboard</h1>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {stats.map((stat, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-md p-6">
-              <p className="text-gray-600 text-sm mb-2">{stat.label}</p>
-              <p className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</p>
-              <p className="text-green-600 text-sm">{stat.change} from last month</p>
+            <div key={index} className="bg-white rounded-lg shadow-md p-6 border border-[#192B17]/10">
+              <p className="text-[#192B17] text-sm mb-2">{stat.label}</p>
+              <p className="text-2xl font-bold text-[#0C0D0C] mb-1">{stat.value}</p>
+              <p className="text-[#4C773B] text-sm font-medium">{stat.change} from last month</p>
             </div>
           ))}
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">Sales Overview</h2>
+          <div className="bg-white rounded-lg shadow-md p-6 border border-[#192B17]/10">
+            <h2 className="text-xl font-bold mb-4 text-[#0C0D0C]">Sales Overview</h2>
             <SalesChart />
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
+          <div className="bg-white rounded-lg shadow-md p-6 border border-[#192B17]/10">
+            <h2 className="text-xl font-bold mb-4 text-[#0C0D0C]">Recent Activity</h2>
             <div className="space-y-4">
               {[1, 2, 3, 4, 5].map((item) => (
-                <div key={item} className="flex items-center justify-between border-b pb-3 last:border-0">
+                <div key={item} className="flex items-center justify-between border-b border-[#192B17]/10 pb-3 last:border-0">
                   <div>
-                    <p className="font-medium text-gray-900">Order #{1000 + item}</p>
-                    <p className="text-sm text-gray-600">2 hours ago</p>
+                    <p className="font-bold text-[#0C0D0C]">Order #{1000 + item}</p>
+                    <p className="text-sm text-[#192B17]">2 hours ago</p>
                   </div>
-                  <p className="font-semibold text-green-600">$299.99</p>
+                  <p className="font-bold text-[#4C773B]">$299.99</p>
                 </div>
               ))}
             </div>

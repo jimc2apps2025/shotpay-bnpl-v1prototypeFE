@@ -58,22 +58,22 @@ export default function SalesChart({ data = defaultData }: SalesChartProps) {
         >
           <defs>
             <linearGradient id="colorSales" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#10b981" stopOpacity={0.3} />
-              <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+              <stop offset="5%" stopColor="#4C773B" stopOpacity={0.3} />
+              <stop offset="95%" stopColor="#4C773B" stopOpacity={0} />
             </linearGradient>
             <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
-              <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+              <stop offset="5%" stopColor="#192B17" stopOpacity={0.3} />
+              <stop offset="95%" stopColor="#192B17" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#192B17" strokeOpacity={0.1} />
           <XAxis
             dataKey="month"
-            stroke="#6b7280"
+            stroke="#192B17"
             style={{ fontSize: '12px' }}
           />
           <YAxis
-            stroke="#6b7280"
+            stroke="#192B17"
             style={{ fontSize: '12px' }}
             tickFormatter={formatCurrency}
           />
@@ -110,7 +110,7 @@ export default function SalesChart({ data = defaultData }: SalesChartProps) {
           <Area
             type="monotone"
             dataKey="sales"
-            stroke="#10b981"
+            stroke="#4C773B"
             strokeWidth={2}
             fillOpacity={1}
             fill="url(#colorSales)"
@@ -119,7 +119,7 @@ export default function SalesChart({ data = defaultData }: SalesChartProps) {
           <Area
             type="monotone"
             dataKey="revenue"
-            stroke="#3b82f6"
+            stroke="#192B17"
             strokeWidth={2}
             fillOpacity={1}
             fill="url(#colorRevenue)"
@@ -128,9 +128,9 @@ export default function SalesChart({ data = defaultData }: SalesChartProps) {
           <Line
             type="monotone"
             dataKey="orders"
-            stroke="#f59e0b"
+            stroke="#0C0D0C"
             strokeWidth={2}
-            dot={{ fill: '#f59e0b', r: 4 }}
+            dot={{ fill: '#0C0D0C', r: 4 }}
             activeDot={{ r: 6 }}
             name="orders"
           />

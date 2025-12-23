@@ -22,10 +22,10 @@ export default function ProductsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-[#FCFCFC] py-8">
       <div className="container mx-auto px-4">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Products</h1>
+          <h1 className="text-3xl font-bold text-[#0C0D0C] mb-4 uppercase">Products</h1>
           
           {/* Search and Filter */}
           <div className="flex flex-col md:flex-row gap-4 mb-6">
@@ -35,10 +35,10 @@ export default function ProductsPage() {
                 placeholder="Search products..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full px-4 py-2 border border-[#192B17]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4C773B] focus:border-[#4C773B] bg-white text-[#0C0D0C]"
               />
               <svg
-                className="absolute right-3 top-2.5 h-5 w-5 text-gray-400"
+                className="absolute right-3 top-2.5 h-5 w-5 text-[#192B17]/60"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -50,30 +50,30 @@ export default function ProductsPage() {
             <div className="flex gap-2">
               <button
                 onClick={() => setSelectedCategory('all')}
-                className={`px-4 py-2 rounded-lg transition-colors ${
+                className={`px-4 py-2 rounded-lg transition-colors font-medium ${
                   selectedCategory === 'all'
-                    ? 'bg-green-600 text-white'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                    ? 'bg-[#4C773B] text-white'
+                    : 'bg-white text-[#0C0D0C] border border-[#192B17]/20 hover:bg-[#192B17]/5'
                 }`}
               >
                 All
               </button>
               <button
                 onClick={() => setSelectedCategory('firearm')}
-                className={`px-4 py-2 rounded-lg transition-colors ${
+                className={`px-4 py-2 rounded-lg transition-colors font-medium ${
                   selectedCategory === 'firearm'
-                    ? 'bg-green-600 text-white'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                    ? 'bg-[#4C773B] text-white'
+                    : 'bg-white text-[#0C0D0C] border border-[#192B17]/20 hover:bg-[#192B17]/5'
                 }`}
               >
                 Firearms
               </button>
               <button
                 onClick={() => setSelectedCategory('ammunition')}
-                className={`px-4 py-2 rounded-lg transition-colors ${
+                className={`px-4 py-2 rounded-lg transition-colors font-medium ${
                   selectedCategory === 'ammunition'
-                    ? 'bg-green-600 text-white'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                    ? 'bg-[#4C773B] text-white'
+                    : 'bg-white text-[#0C0D0C] border border-[#192B17]/20 hover:bg-[#192B17]/5'
                 }`}
               >
                 Ammunition
@@ -84,7 +84,7 @@ export default function ProductsPage() {
 
         {filteredProducts.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-600 text-lg">No products found matching your criteria.</p>
+            <p className="text-[#192B17] text-lg">No products found matching your criteria.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -92,7 +92,7 @@ export default function ProductsPage() {
               <Link
                 key={product.id}
                 href={`/products/${product.id}`}
-                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col"
+                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col border border-[#192B17]/10"
               >
                 <div className="aspect-square relative">
                   <ProductImage
@@ -101,24 +101,24 @@ export default function ProductsPage() {
                     className="aspect-square"
                   />
                   {product.fflRequired && (
-                    <span className="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded z-10">
+                    <span className="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded z-10 font-medium">
                       FFL Required
                     </span>
                   )}
                   {!product.inStock && (
-                    <span className="absolute top-2 left-2 bg-gray-600 text-white text-xs px-2 py-1 rounded z-10">
+                    <span className="absolute top-2 left-2 bg-[#192B17] text-white text-xs px-2 py-1 rounded z-10 font-medium">
                       Out of Stock
                     </span>
                   )}
                 </div>
                 <div className="p-4 flex-1 flex flex-col">
                   <div className="mb-2">
-                    <span className="text-xs text-gray-500 uppercase">{product.category}</span>
+                    <span className="text-xs text-[#4C773B] uppercase font-bold">{product.category}</span>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
-                  <p className="text-sm text-gray-600 mb-4 flex-1 line-clamp-2">{product.description}</p>
+                  <h3 className="text-lg font-bold text-[#0C0D0C] mb-2 line-clamp-2">{product.name}</h3>
+                  <p className="text-sm text-[#192B17] mb-4 flex-1 line-clamp-2">{product.description}</p>
                   <div className="mt-auto">
-                    <p className="text-xl font-bold text-green-600 mb-3">${product.price.toFixed(2)}</p>
+                    <p className="text-xl font-bold text-[#4C773B] mb-3">${product.price.toFixed(2)}</p>
                     <button 
                       onClick={(e) => {
                         e.preventDefault();
@@ -136,10 +136,10 @@ export default function ProductsPage() {
                         }
                       }}
                       disabled={!product.inStock}
-                      className={`w-full py-2 rounded-lg transition-all font-semibold ${
+                      className={`w-full py-2 rounded-lg transition-all font-bold ${
                         product.inStock
-                          ? 'bg-green-600 text-white hover:bg-green-700 shadow-md hover:shadow-lg transform hover:-translate-y-0.5'
-                          : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                          ? 'bg-[#4C773B] text-white hover:bg-[#192B17] shadow-md hover:shadow-lg transform hover:-translate-y-0.5'
+                          : 'bg-[#192B17]/20 text-[#192B17]/60 cursor-not-allowed'
                       }`}
                     >
                       {product.inStock ? 'Add to Cart' : 'Out of Stock'}

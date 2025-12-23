@@ -48,12 +48,12 @@ export default function CartPage() {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50 py-8">
+      <div className="min-h-screen bg-[#FCFCFC] py-8">
         <div className="container mx-auto px-4 max-w-6xl">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Shopping Cart</h1>
+          <h1 className="text-3xl font-bold text-[#0C0D0C] mb-8 uppercase">Shopping Cart</h1>
 
           {items.length === 0 ? (
-            <div className="bg-white rounded-lg shadow-md p-12 text-center">
+            <div className="bg-white rounded-lg shadow-md p-12 text-center border border-[#192B17]/10">
               <svg
                 className="w-24 h-24 text-gray-400 mx-auto mb-4"
                 fill="none"
@@ -67,11 +67,11 @@ export default function CartPage() {
                   d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                 />
               </svg>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-2">Your cart is empty</h2>
-              <p className="text-gray-600 mb-6">Start shopping to add items to your cart</p>
+              <h2 className="text-2xl font-bold text-[#0C0D0C] mb-2">Your cart is empty</h2>
+              <p className="text-[#192B17] mb-6">Start shopping to add items to your cart</p>
               <Link
                 href="/products"
-                className="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold"
+                className="inline-block bg-[#4C773B] text-white px-6 py-3 rounded-lg hover:bg-[#192B17] transition-colors font-bold"
               >
                 Browse Products
               </Link>
@@ -80,7 +80,7 @@ export default function CartPage() {
             <div className="lg:grid lg:grid-cols-3 lg:gap-8">
               {/* Cart Items */}
               <div className="lg:col-span-2">
-                <div className="bg-white rounded-lg shadow-md p-6 mb-4">
+                <div className="bg-white rounded-lg shadow-md p-6 mb-4 border border-[#192B17]/10">
                   <div className="flex items-center justify-between mb-6">
                     <h2 className="text-xl font-semibold">Cart Items ({items.length})</h2>
                     <button
@@ -118,11 +118,11 @@ export default function CartPage() {
                           </Link>
                           <div className="flex-1 min-w-0">
                             <Link href={`/products/${item.id}`}>
-                              <h3 className="font-semibold text-gray-900 hover:text-green-600 transition-colors truncate">
+                              <h3 className="font-bold text-[#0C0D0C] hover:text-[#4C773B] transition-colors truncate">
                                 {item.name}
                               </h3>
                             </Link>
-                            <p className="text-gray-600">${item.price.toFixed(2)} each</p>
+                            <p className="text-[#192B17]">${item.price.toFixed(2)} each</p>
                             {item.fflRequired && (
                               <span className="inline-block mt-1 text-xs bg-red-100 text-red-800 px-2 py-0.5 rounded">
                                 FFL Required
@@ -157,11 +157,11 @@ export default function CartPage() {
 
                           {/* Price */}
                           <div className="text-right min-w-[100px]">
-                            <p className="font-semibold text-gray-900">
+                            <p className="font-bold text-[#0C0D0C]">
                               ${(item.price * item.quantity).toFixed(2)}
                             </p>
                             {item.quantity > 1 && (
-                              <p className="text-xs text-gray-500">
+                              <p className="text-xs text-[#192B17]/70">
                                 ${item.price.toFixed(2)} × {item.quantity}
                               </p>
                             )}
@@ -202,27 +202,27 @@ export default function CartPage() {
 
               {/* Order Summary */}
               <div className="lg:col-span-1 mt-8 lg:mt-0">
-                <div className="bg-white rounded-lg shadow-md p-6 sticky top-4">
-                  <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+                <div className="bg-white rounded-lg shadow-md p-6 sticky top-4 border border-[#192B17]/10">
+                  <h2 className="text-xl font-bold mb-4 text-[#0C0D0C]">Order Summary</h2>
                   <div className="space-y-3 mb-6">
-                    <div className="flex justify-between text-gray-600">
+                    <div className="flex justify-between text-[#192B17]">
                       <span>Subtotal</span>
                       <span>${subtotal.toFixed(2)}</span>
                     </div>
-                    <div className="flex justify-between text-gray-600">
+                    <div className="flex justify-between text-[#192B17]">
                       <span>Shipping</span>
-                      <span>{shipping === 0 ? <span className="text-green-600">Free</span> : `$${shipping.toFixed(2)}`}</span>
+                      <span>{shipping === 0 ? <span className="text-[#4C773B] font-bold">Free</span> : `$${shipping.toFixed(2)}`}</span>
                     </div>
                     {subtotal < 100 && (
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-[#192B17]/70">
                         Add ${(100 - subtotal).toFixed(2)} more for free shipping
                       </p>
                     )}
-                    <div className="flex justify-between text-gray-600">
+                    <div className="flex justify-between text-[#192B17]">
                       <span>Tax</span>
                       <span>${tax.toFixed(2)}</span>
                     </div>
-                    <div className="border-t pt-3 flex justify-between text-lg font-bold">
+                    <div className="border-t border-[#192B17]/10 pt-3 flex justify-between text-lg font-bold text-[#0C0D0C]">
                       <span>Total</span>
                       <span>${total.toFixed(2)}</span>
                     </div>
@@ -230,13 +230,13 @@ export default function CartPage() {
 
                   <Link
                     href="/checkout"
-                    className="block w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold mb-4 text-center shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                    className="block w-full bg-[#4C773B] text-white py-3 rounded-lg hover:bg-[#192B17] transition-colors font-bold mb-4 text-center shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
                   >
                     Proceed to Checkout
                   </Link>
 
-                  <div className="pt-4 border-t">
-                    <p className="text-xs text-gray-500 text-center">
+                  <div className="pt-4 border-t border-[#192B17]/10">
+                    <p className="text-xs text-[#192B17]/70 text-center">
                       <svg className="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                       </svg>
