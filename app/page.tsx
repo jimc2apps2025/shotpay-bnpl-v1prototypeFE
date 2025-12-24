@@ -1,11 +1,14 @@
 import Link from 'next/link';
+import ShieldLogo from '@/components/ShieldLogo';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#FCFCFC]">
+    <div className="min-h-screen bg-[#0C0D0C]">
       <div className="container mx-auto px-4 py-8 md:py-16">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0C0D0C] mb-3 md:mb-4 uppercase tracking-tight">shotpay</h1>
-        <p className="text-base md:text-lg text-[#192B17] mb-8 md:mb-12 max-w-2xl">
+        <div className="mb-6 md:mb-8 flex justify-center md:justify-start">
+          <ShieldLogo size="lg" className="h-32 w-32 md:h-40 md:w-40 lg:h-48 lg:w-48" />
+        </div>
+        <p className="text-base md:text-lg text-white/90 mb-8 md:mb-12 max-w-2xl">
           The first end-to-end e-commerce firearms toolkit built for the 2A community
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">

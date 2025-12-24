@@ -6,6 +6,7 @@ import { products } from '@/data/products';
 import ProductImage from '@/components/ProductImage';
 import { useCart } from '@/contexts/CartContext';
 import Toast from '@/components/Toast';
+import ShieldLogo from '@/components/ShieldLogo';
 
 export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -118,7 +119,25 @@ export default function ProductsPage() {
                   <h3 className="text-lg font-bold text-[#0C0D0C] mb-2 line-clamp-2">{product.name}</h3>
                   <p className="text-sm text-[#192B17] mb-4 flex-1 line-clamp-2">{product.description}</p>
                   <div className="mt-auto">
-                    <p className="text-xl font-bold text-[#4C773B] mb-3">${product.price.toFixed(2)}</p>
+                    <p className="text-xl font-bold text-[#4C773B] mb-2">${product.price.toFixed(2)}</p>
+                    {/* BNPL Monthly Payment */}
+                    <div className="mb-3 p-2 bg-[#0C0D0C] border border-[#4C773B]/30 rounded">
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center space-x-1.5 flex-1 min-w-0">
+                          <ShieldLogo size="sm" className="h-5 w-5 flex-shrink-0" />
+                          <div className="min-w-0">
+                            <div className="flex items-center space-x-1">
+                              <span className="text-[10px] text-white font-bold">Pay in 6</span>
+                              <span className="text-[9px] text-white/60">by</span>
+                              <span className="text-[10px] text-white font-bold">ShotPay</span>
+                            </div>
+                          </div>
+                        </div>
+                        <span className="text-xs font-bold text-[#4C773B] whitespace-nowrap">
+                          ${(product.price / 6).toFixed(2)}<span className="text-[10px] font-normal text-white/70">/mo</span>
+                        </span>
+                      </div>
+                    </div>
                     <button 
                       onClick={(e) => {
                         e.preventDefault();

@@ -6,6 +6,33 @@ interface BNPLOptionsProps {
   onSelectPlan: (plan: string) => void;
 }
 
+// Helper function to format date
+const formatDate = (date: Date): string => {
+  return date.toLocaleDateString('en-US', { 
+    month: 'short', 
+    day: 'numeric', 
+    year: 'numeric' 
+  });
+};
+
+// Helper function to get payment dates
+const getPaymentDates = (installments: number): Date[] => {
+  const dates: Date[] = [];
+  const today = new Date();
+  
+  // First payment is today
+  dates.push(today);
+  
+  // Subsequent payments are bi-weekly (every 14 days)
+  for (let i = 1; i < installments; i++) {
+    const nextDate = new Date(today);
+    nextDate.setDate(today.getDate() + (i * 14)); // Bi-weekly = 14 days
+    dates.push(nextDate);
+  }
+  
+  return dates;
+};
+
 export default function BNPLOptions({ total, selectedPlan, onSelectPlan }: BNPLOptionsProps) {
   const serviceFee = 7.49;
   const totalWithFee = total + serviceFee;
@@ -33,84 +60,88 @@ export default function BNPLOptions({ total, selectedPlan, onSelectPlan }: BNPLO
     <div className="mt-4 space-y-3">
       <p className="text-sm text-gray-600 mb-3">Choose your payment plan:</p>
       
-      {plans.map((plan) => (
-        <div
-          key={plan.id}
-          className={`border-2 rounded-lg p-4 cursor-pointer transition-all ${
-            selectedPlan === plan.id
-              ? 'border-green-600 bg-green-50'
-              : 'border-gray-200 hover:border-gray-300'
-          }`}
-          onClick={() => onSelectPlan(plan.id)}
-        >
-          <div className="flex items-start justify-between">
-            <div className="flex-1">
-              <div className="flex items-center space-x-2 mb-1">
-                <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                  selectedPlan === plan.id ? 'border-green-600' : 'border-gray-300'
-                }`}>
-                  {selectedPlan === plan.id && (
-                    <div className="w-2 h-2 rounded-full bg-green-600"></div>
-                  )}
+      {plans.map((plan) => {
+        const paymentDates = selectedPlan === plan.id ? getPaymentDates(plan.installments) : [];
+        
+        return (
+          <div
+            key={plan.id}
+            className={`border-2 rounded-lg p-4 cursor-pointer transition-all ${
+              selectedPlan === plan.id
+                ? 'border-green-600 bg-green-50'
+                : 'border-gray-200 hover:border-gray-300'
+            }`}
+            onClick={() => onSelectPlan(plan.id)}
+          >
+            <div className="flex items-start justify-between">
+              <div className="flex-1">
+                <div className="flex items-center space-x-2 mb-1">
+                  <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                    selectedPlan === plan.id ? 'border-green-600' : 'border-gray-300'
+                  }`}>
+                    {selectedPlan === plan.id && (
+                      <div className="w-2 h-2 rounded-full bg-green-600"></div>
+                    )}
+                  </div>
+                  <h4 className="font-semibold text-gray-900">{plan.name}</h4>
+                  <span className="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded">
+                    No Interest
+                  </span>
                 </div>
-                <h4 className="font-semibold text-gray-900">{plan.name}</h4>
-                <span className="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded">
-                  No Interest
-                </span>
-              </div>
-              <p className="text-sm text-gray-600 ml-6">{plan.description}</p>
-              
-              {selectedPlan === plan.id && (
-                <div className="mt-3 ml-6 p-4 bg-white rounded-lg border-2 border-green-300 shadow-sm">
-                  <p className="text-xs font-semibold text-gray-700 mb-3 uppercase tracking-wide">
-                    Payment Schedule
-                  </p>
-                  <div className="space-y-2.5">
-                    <div className="flex justify-between items-center text-sm pb-2 border-b border-gray-100">
-                      <div>
-                        <span className="text-gray-700 font-medium">Today</span>
-                        <span className="text-xs text-gray-500 block">Down Payment</span>
-                      </div>
-                      <span className="font-bold text-gray-900 text-base">
-                        ${plan.installmentAmount.toFixed(2)}
-                      </span>
-                    </div>
-                    {Array.from({ length: plan.installments - 1 }, (_, i) => (
-                      <div key={i} className="flex justify-between items-center text-sm">
+                <p className="text-sm text-gray-600 ml-6">{plan.description}</p>
+                
+                {selectedPlan === plan.id && paymentDates.length > 0 && (
+                  <div className="mt-3 ml-6 p-4 bg-white rounded-lg border-2 border-green-300 shadow-sm">
+                    <p className="text-xs font-semibold text-gray-700 mb-3 uppercase tracking-wide">
+                      Payment Schedule
+                    </p>
+                    <div className="space-y-2.5">
+                      <div className="flex justify-between items-center text-sm pb-2 border-b border-gray-100">
                         <div>
-                          <span className="text-gray-700">Week {(i + 1) * 2}</span>
-                          <span className="text-xs text-gray-500 block">Auto-pay (bi-weekly)</span>
+                          <span className="text-gray-700 font-medium">{formatDate(paymentDates[0])}</span>
+                          <span className="text-xs text-gray-500 block">Down Payment (Today)</span>
                         </div>
-                        <span className="font-semibold text-gray-900">
+                        <span className="font-bold text-gray-900 text-base">
                           ${plan.installmentAmount.toFixed(2)}
                         </span>
                       </div>
-                    ))}
-                    <div className="pt-3 mt-3 border-t-2 border-gray-200">
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm font-semibold text-gray-700">Total Amount</span>
-                        <span className="text-base font-bold text-gray-900">${totalWithFee.toFixed(2)}</span>
+                      {paymentDates.slice(1).map((date, i) => (
+                        <div key={i} className="flex justify-between items-center text-sm">
+                          <div>
+                            <span className="text-gray-700 font-medium">{formatDate(date)}</span>
+                            <span className="text-xs text-gray-500 block">Auto-pay (bi-weekly)</span>
+                          </div>
+                          <span className="font-semibold text-gray-900">
+                            ${plan.installmentAmount.toFixed(2)}
+                          </span>
+                        </div>
+                      ))}
+                      <div className="pt-3 mt-3 border-t-2 border-gray-200">
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm font-semibold text-gray-700">Total Amount</span>
+                          <span className="text-base font-bold text-gray-900">${totalWithFee.toFixed(2)}</span>
+                        </div>
+                        <p className="text-xs text-gray-500 mt-1">
+                          Includes ${serviceFee.toFixed(2)} service fee
+                        </p>
                       </div>
-                      <p className="text-xs text-gray-500 mt-1">
-                        Includes ${serviceFee.toFixed(2)} service fee
-                      </p>
                     </div>
                   </div>
+                )}
+              </div>
+            
+              {!selectedPlan && (
+                <div className="text-right ml-4">
+                  <p className="text-sm font-semibold text-gray-900">
+                    ${plan.installmentAmount.toFixed(2)}
+                  </p>
+                  <p className="text-xs text-gray-500">per payment</p>
                 </div>
               )}
             </div>
-            
-            {!selectedPlan && (
-              <div className="text-right ml-4">
-                <p className="text-sm font-semibold text-gray-900">
-                  ${plan.installmentAmount.toFixed(2)}
-                </p>
-                <p className="text-xs text-gray-500">per payment</p>
-              </div>
-            )}
           </div>
-        </div>
-      ))}
+        );
+      })}
 
       <div className="mt-4 p-3 bg-blue-50 rounded-lg">
         <div className="flex items-start space-x-2">

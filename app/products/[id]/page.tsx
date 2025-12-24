@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation';
 import ProductImage from '@/components/ProductImage';
 import { useCart } from '@/contexts/CartContext';
 import Toast from '@/components/Toast';
+import ShieldLogo from '@/components/ShieldLogo';
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -92,11 +93,34 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   <span className="text-xs sm:text-sm text-[#4C773B] uppercase tracking-wide font-bold">{product.category}</span>
                 </div>
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0C0D0C] mb-3 sm:mb-4">{product.name}</h1>
-                <div className="flex items-baseline space-x-3 mb-4 sm:mb-6">
+                <div className="flex items-baseline space-x-3 mb-2 sm:mb-3">
                   <p className="text-3xl sm:text-4xl font-bold text-[#4C773B]">${product.price.toFixed(2)}</p>
                   {product.inStock && (
                     <span className="text-xs sm:text-sm text-[#4C773B] bg-[#4C773B]/10 px-2 py-1 rounded font-medium">In Stock</span>
                   )}
+                </div>
+                
+                {/* BNPL Monthly Payment */}
+                <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-[#0C0D0C] border border-[#4C773B]/30 rounded-lg">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <ShieldLogo size="sm" className="h-8 w-8 sm:h-10 sm:w-10 flex-shrink-0" />
+                      <div>
+                        <div className="flex items-center space-x-2 mb-1">
+                          <p className="text-xs sm:text-sm text-white font-bold">Pay in 6</p>
+                          <span className="text-[10px] sm:text-xs text-white/70">by</span>
+                          <p className="text-xs sm:text-sm text-white font-bold">ShotPay</p>
+                        </div>
+                        <p className="text-xs text-white/70">6 monthly payments • No interest</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-lg sm:text-xl font-bold text-[#4C773B]">
+                        ${(product.price / 6).toFixed(2)}<span className="text-xs sm:text-sm font-normal text-white/70">/mo</span>
+                      </p>
+                      <p className="text-xs text-white/70">Total: ${product.price.toFixed(2)}</p>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Quantity Selector */}

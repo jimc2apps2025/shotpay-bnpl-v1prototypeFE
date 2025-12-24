@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/contexts/CartContext';
+import ShieldLogo from './ShieldLogo';
 
 export default function Navigation() {
   const { getTotalItems } = useCart();
@@ -10,25 +11,25 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-[#FCFCFC] shadow-md sticky top-0 z-50 border-b border-[#192B17]/10">
+    <nav className="bg-[#0C0D0C] shadow-md sticky top-0 z-50 border-b border-[#192B17]/20">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="text-xl md:text-2xl font-bold text-[#0C0D0C] uppercase tracking-tight">
-            shotpay
+          <Link href="/" className="flex items-center">
+            <ShieldLogo size="sm" className="h-10 w-10 md:h-12 md:w-12" />
           </Link>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link href="/products" className="text-[#0C0D0C] hover:text-[#4C773B] transition-colors font-medium">
+            <Link href="/products" className="text-white hover:text-[#4C773B] transition-colors font-medium">
               Products
             </Link>
-            <Link href="/ffl-dealers" className="text-[#0C0D0C] hover:text-[#4C773B] transition-colors font-medium">
+            <Link href="/ffl-dealers" className="text-white hover:text-[#4C773B] transition-colors font-medium">
               FFL Dealers
             </Link>
-            <Link href="/dashboard" className="text-[#0C0D0C] hover:text-[#4C773B] transition-colors font-medium">
+            <Link href="/dashboard" className="text-white hover:text-[#4C773B] transition-colors font-medium">
               Dashboard
             </Link>
-            <Link href="/cart" className="relative text-[#0C0D0C] hover:text-[#4C773B] transition-colors">
+            <Link href="/cart" className="relative text-white hover:text-[#4C773B] transition-colors">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
@@ -42,7 +43,7 @@ export default function Navigation() {
 
           {/* Mobile Menu Button & Cart */}
           <div className="flex items-center space-x-4 md:hidden">
-            <Link href="/cart" className="relative text-[#0C0D0C] hover:text-[#4C773B] transition-colors">
+            <Link href="/cart" className="relative text-white hover:text-[#4C773B] transition-colors">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
@@ -54,7 +55,7 @@ export default function Navigation() {
             </Link>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-[#0C0D0C] hover:text-[#4C773B] transition-colors p-2"
+              className="text-white hover:text-[#4C773B] transition-colors p-2"
               aria-label="Toggle menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,26 +71,26 @@ export default function Navigation() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-[#192B17]/10 bg-white">
+          <div className="md:hidden border-t border-white/10 bg-[#0C0D0C]">
             <div className="flex flex-col py-4 space-y-3">
               <Link
                 href="/products"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-2 text-[#0C0D0C] hover:text-[#4C773B] hover:bg-[#192B17]/5 transition-colors font-medium"
+                className="px-4 py-2 text-white hover:text-[#4C773B] hover:bg-white/5 transition-colors font-medium"
               >
                 Products
               </Link>
               <Link
                 href="/ffl-dealers"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-2 text-[#0C0D0C] hover:text-[#4C773B] hover:bg-[#192B17]/5 transition-colors font-medium"
+                className="px-4 py-2 text-white hover:text-[#4C773B] hover:bg-white/5 transition-colors font-medium"
               >
                 FFL Dealers
               </Link>
               <Link
                 href="/dashboard"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-2 text-[#0C0D0C] hover:text-[#4C773B] hover:bg-[#192B17]/5 transition-colors font-medium"
+                className="px-4 py-2 text-white hover:text-[#4C773B] hover:bg-white/5 transition-colors font-medium"
               >
                 Dashboard
               </Link>
