@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import BNPLOptions from '@/components/BNPLOptions';
@@ -8,9 +9,24 @@ import { getProductById } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
 
 export default function CheckoutPage() {
+  const searchParams = useSearchParams();
   const [paymentMethod, setPaymentMethod] = useState<'full' | 'bnpl'>('bnpl');
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const { items } = useCart();
+
+  // Auto-select payment method and plan from URL parameters
+  useEffect(() => {
+    const paymentParam = searchParams.get('payment');
+    const planParam = searchParams.get('plan');
+    
+    if (paymentParam === 'bnpl') {
+      setPaymentMethod('bnpl');
+    }
+    
+    if (planParam === 'pay6' || planParam === 'pay4') {
+      setSelectedPlan(planParam);
+    }
+  }, [searchParams]);
 
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const tax = subtotal * 0.08;

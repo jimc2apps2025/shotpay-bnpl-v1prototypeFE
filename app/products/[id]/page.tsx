@@ -2,6 +2,7 @@
 
 import { useState, use } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { getProductById, products } from '@/data/products';
 import { notFound } from 'next/navigation';
 import ProductImage from '@/components/ProductImage';
@@ -14,6 +15,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const productId = parseInt(id);
   const product = getProductById(productId);
   const { addToCart } = useCart();
+  const router = useRouter();
   const [quantity, setQuantity] = useState(1);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
@@ -44,6 +46,20 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     if (newQuantity >= 1 && newQuantity <= 10) {
       setQuantity(newQuantity);
     }
+  };
+
+  const handlePayIn6Click = () => {
+    // Add product to cart if not already there
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: quantity,
+      image: product.image,
+      fflRequired: product.fflRequired,
+    });
+    // Navigate to checkout with BNPL and Pay in 6 pre-selected
+    router.push('/checkout?payment=bnpl&plan=pay6');
   };
 
   return (
@@ -101,7 +117,10 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 </div>
                 
                 {/* BNPL Monthly Payment */}
-                <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-[#0C0D0C] border border-[#4C773B]/30 rounded-lg">
+                <button
+                  onClick={handlePayIn6Click}
+                  className="w-full mb-4 sm:mb-6 p-3 sm:p-4 bg-[#0C0D0C] border border-[#4C773B]/30 rounded-lg hover:border-[#4C773B]/50 hover:bg-[#0C0D0C]/90 transition-all cursor-pointer text-left"
+                >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       <ShieldLogo size="sm" className="h-8 w-8 sm:h-10 sm:w-10 flex-shrink-0" />
@@ -121,7 +140,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                       <p className="text-xs text-white/70">Total: ${product.price.toFixed(2)}</p>
                     </div>
                   </div>
-                </div>
+                </button>
 
                 {/* Quantity Selector */}
                 {product.inStock && (
