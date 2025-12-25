@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -8,7 +8,7 @@ import BNPLOptions from '@/components/BNPLOptions';
 import { getProductById } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
 
-export default function CheckoutPage() {
+function CheckoutContent() {
   const searchParams = useSearchParams();
   const [paymentMethod, setPaymentMethod] = useState<'full' | 'bnpl'>('bnpl');
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
@@ -344,6 +344,22 @@ export default function CheckoutPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function CheckoutPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 py-8">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="bg-white rounded-lg shadow-md p-12 text-center">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Loading checkout...</h2>
+          </div>
+        </div>
+      </div>
+    }>
+      <CheckoutContent />
+    </Suspense>
   );
 }
 
