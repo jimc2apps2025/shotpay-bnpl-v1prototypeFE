@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useCart } from '@/contexts/CartContext';
 import ShieldLogo from './ShieldLogo';
 
@@ -39,6 +40,16 @@ export default function Navigation() {
                 </span>
               )}
             </Link>
+            <div className="flex items-center">
+              <Image
+                src="/header-image.png"
+                alt="Header"
+                width={120}
+                height={40}
+                className="h-8 w-auto object-contain"
+                priority
+              />
+            </div>
           </div>
 
           {/* Mobile Menu Button & Cart */}
@@ -53,6 +64,16 @@ export default function Navigation() {
                 </span>
               )}
             </Link>
+            <div className="flex items-center">
+              <Image
+                src="/header-image.png"
+                alt="Header"
+                width={100}
+                height={32}
+                className="h-6 w-auto object-contain"
+                priority
+              />
+            </div>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-white hover:text-[#4C773B] transition-colors p-2"

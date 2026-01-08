@@ -267,14 +267,6 @@ function CheckoutContent() {
                   <span>Tax</span>
                   <span>${tax.toFixed(2)}</span>
                 </div>
-                {paymentMethod === 'bnpl' && selectedPlan && (
-                  <div className="pt-2 border-t">
-                    <div className="flex justify-between text-sm text-gray-600 mb-1">
-                      <span>Service Fee</span>
-                      <span>$7.49</span>
-                    </div>
-                  </div>
-                )}
                 <div className="border-t pt-2 flex justify-between text-lg font-bold">
                   <span>Total</span>
                   <span>${total.toFixed(2)}</span>
@@ -289,19 +281,19 @@ function CheckoutContent() {
                       <>
                         <div className="flex justify-between text-sm">
                           <span className="text-gray-700">Today (Down Payment)</span>
-                          <span className="font-semibold text-gray-900">${((total + 7.49) / 4).toFixed(2)}</span>
+                          <span className="font-semibold text-gray-900">${(total / 4).toFixed(2)}</span>
                         </div>
                         <div className="flex justify-between text-sm">
                           <span className="text-gray-700">Week 2</span>
-                          <span className="font-semibold text-gray-900">${((total + 7.49) / 4).toFixed(2)}</span>
+                          <span className="font-semibold text-gray-900">${(total / 4).toFixed(2)}</span>
                         </div>
                         <div className="flex justify-between text-sm">
                           <span className="text-gray-700">Week 4</span>
-                          <span className="font-semibold text-gray-900">${((total + 7.49) / 4).toFixed(2)}</span>
+                          <span className="font-semibold text-gray-900">${(total / 4).toFixed(2)}</span>
                         </div>
                         <div className="flex justify-between text-sm">
                           <span className="text-gray-700">Week 6</span>
-                          <span className="font-semibold text-gray-900">${((total + 7.49) / 4).toFixed(2)}</span>
+                          <span className="font-semibold text-gray-900">${(total / 4).toFixed(2)}</span>
                         </div>
                       </>
                     )}
@@ -309,12 +301,12 @@ function CheckoutContent() {
                       <>
                         <div className="flex justify-between text-sm">
                           <span className="text-gray-700">Today (Down Payment)</span>
-                          <span className="font-semibold text-gray-900">${((total + 7.49) / 6).toFixed(2)}</span>
+                          <span className="font-semibold text-gray-900">${(total / 6).toFixed(2)}</span>
                         </div>
                         {[2, 4, 6, 8, 10].map((week) => (
                           <div key={week} className="flex justify-between text-sm">
                             <span className="text-gray-700">Week {week}</span>
-                            <span className="font-semibold text-gray-900">${((total + 7.49) / 6).toFixed(2)}</span>
+                            <span className="font-semibold text-gray-900">${(total / 6).toFixed(2)}</span>
                           </div>
                         ))}
                       </>
@@ -322,7 +314,7 @@ function CheckoutContent() {
                     <div className="pt-2 mt-2 border-t border-green-300">
                       <div className="flex justify-between text-sm font-semibold">
                         <span className="text-gray-900">Total Amount</span>
-                        <span className="text-gray-900">${(total + 7.49).toFixed(2)}</span>
+                        <span className="text-gray-900">${total.toFixed(2)}</span>
                       </div>
                     </div>
                   </div>
@@ -337,7 +329,7 @@ function CheckoutContent() {
               </button>
 
               <p className="text-xs text-gray-500 mt-4 text-center">
-                ¹Pay later loans are originated by WebBank or Sezzle. Refer to your loan agreement for lender information. Service fees vary and can range from $0 to $7.49 depending on the purchase price.
+                ¹Pay later loans are originated by WebBank or Sezzle. Refer to your loan agreement for lender information.
               </p>
             </div>
           </div>

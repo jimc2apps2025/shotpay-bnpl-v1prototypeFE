@@ -34,9 +34,6 @@ const getPaymentDates = (installments: number): Date[] => {
 };
 
 export default function BNPLOptions({ total, selectedPlan, onSelectPlan }: BNPLOptionsProps) {
-  const serviceFee = 7.49;
-  const totalWithFee = total + serviceFee;
-
   const plans = [
     {
       id: 'pay4',
@@ -44,7 +41,7 @@ export default function BNPLOptions({ total, selectedPlan, onSelectPlan }: BNPLO
       description: '4 interest-free payments over 6 weeks',
       installments: 4,
       weeks: 6,
-      installmentAmount: totalWithFee / 4,
+      installmentAmount: total / 4,
     },
     {
       id: 'pay6',
@@ -52,7 +49,7 @@ export default function BNPLOptions({ total, selectedPlan, onSelectPlan }: BNPLO
       description: '6 interest-free payments over 12 weeks',
       installments: 6,
       weeks: 12,
-      installmentAmount: totalWithFee / 6,
+      installmentAmount: total / 6,
     },
   ];
 
@@ -119,11 +116,8 @@ export default function BNPLOptions({ total, selectedPlan, onSelectPlan }: BNPLO
                       <div className="pt-3 mt-3 border-t-2 border-gray-200">
                         <div className="flex justify-between items-center">
                           <span className="text-sm font-semibold text-gray-700">Total Amount</span>
-                          <span className="text-base font-bold text-gray-900">${totalWithFee.toFixed(2)}</span>
+                          <span className="text-base font-bold text-gray-900">${total.toFixed(2)}</span>
                         </div>
-                        <p className="text-xs text-gray-500 mt-1">
-                          Includes ${serviceFee.toFixed(2)} service fee
-                        </p>
                       </div>
                     </div>
                   </div>
@@ -153,7 +147,7 @@ export default function BNPLOptions({ total, selectedPlan, onSelectPlan }: BNPLO
             <ul className="list-disc list-inside space-y-0.5 ml-2">
               <li>Make your first payment today</li>
               <li>Remaining payments are automatic every 2 weeks</li>
-              <li>No interest, just a small service fee</li>
+              <li>No interest, no fees</li>
               <li>Manage payments anytime in your account</li>
             </ul>
           </div>
