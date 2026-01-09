@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { products } from '@/data/products';
 import ProductImage from '@/components/ProductImage';
 import { useCart } from '@/contexts/CartContext';
@@ -10,10 +11,27 @@ import ShieldLogo from '@/components/ShieldLogo';
 
 export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'firearm' | 'ammunition' | 'accessory'>('all');
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'rifle' | 'pistol' | 'ammunition' | 'accessory' | 'target'>('all');
   const { addToCart } = useCart();
+  const router = useRouter();
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
+
+  const handleSubscriptionClick = (e: React.MouseEvent, product: typeof products[0]) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (product.inStock) {
+      addToCart({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: 1,
+        image: product.image,
+        fflRequired: product.fflRequired,
+      });
+      router.push('/checkout?payment=subscription&plan=monthly');
+    }
+  };
 
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -60,14 +78,24 @@ export default function ProductsPage() {
                 All
               </button>
               <button
-                onClick={() => setSelectedCategory('firearm')}
+                onClick={() => setSelectedCategory('rifle')}
                 className={`px-3 md:px-4 py-2 rounded-lg transition-colors font-medium whitespace-nowrap text-sm md:text-base ${
-                  selectedCategory === 'firearm'
+                  selectedCategory === 'rifle'
                     ? 'bg-[#4C773B] text-white'
                     : 'bg-white text-[#0C0D0C] border border-[#192B17]/20 hover:bg-[#192B17]/5'
                 }`}
               >
-                Firearms
+                Rifle
+              </button>
+              <button
+                onClick={() => setSelectedCategory('pistol')}
+                className={`px-3 md:px-4 py-2 rounded-lg transition-colors font-medium whitespace-nowrap text-sm md:text-base ${
+                  selectedCategory === 'pistol'
+                    ? 'bg-[#4C773B] text-white'
+                    : 'bg-white text-[#0C0D0C] border border-[#192B17]/20 hover:bg-[#192B17]/5'
+                }`}
+              >
+                Pistol
               </button>
               <button
                 onClick={() => setSelectedCategory('ammunition')}
@@ -78,6 +106,16 @@ export default function ProductsPage() {
                 }`}
               >
                 Ammunition
+              </button>
+              <button
+                onClick={() => setSelectedCategory('target')}
+                className={`px-3 md:px-4 py-2 rounded-lg transition-colors font-medium whitespace-nowrap text-sm md:text-base ${
+                  selectedCategory === 'target'
+                    ? 'bg-[#4C773B] text-white'
+                    : 'bg-white text-[#0C0D0C] border border-[#192B17]/20 hover:bg-[#192B17]/5'
+                }`}
+              >
+                Target
               </button>
             </div>
           </div>
@@ -120,24 +158,44 @@ export default function ProductsPage() {
                   <p className="text-sm text-[#192B17] mb-4 flex-1 line-clamp-2">{product.description}</p>
                   <div className="mt-auto">
                     <p className="text-xl font-bold text-[#4C773B] mb-2">${product.price.toFixed(2)}</p>
-                    {/* BNPL Monthly Payment */}
-                    <div className="mb-3 p-2 bg-[#0C0D0C] border border-[#4C773B]/30 rounded">
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="flex items-center space-x-1.5 flex-1 min-w-0">
-                          <ShieldLogo size="sm" className="h-5 w-5 flex-shrink-0" />
-                          <div className="min-w-0">
-                            <div className="flex items-center space-x-1">
-                              <span className="text-[10px] text-white font-bold">Pay in 6</span>
-                              <span className="text-[9px] text-white/60">by</span>
-                              <span className="text-[10px] text-white font-bold">ShotPay</span>
+                    {/* Payment Option */}
+                    {product.category === 'ammunition' || product.category === 'target' ? (
+                      <div 
+                        onClick={(e) => handleSubscriptionClick(e, product)}
+                        className="mb-3 p-2 bg-[#0C0D0C] border border-[#4C773B]/30 rounded hover:border-[#4C773B]/50 hover:bg-[#0C0D0C]/90 transition-all cursor-pointer"
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="flex items-center space-x-1.5 flex-1 min-w-0">
+                            <ShieldLogo size="sm" className="h-5 w-5 flex-shrink-0" />
+                            <div className="min-w-0">
+                              <div className="flex items-center space-x-1">
+                                <span className="text-[10px] text-white font-bold">Subscription Based</span>
+                                <span className="text-[9px] text-white/60">by</span>
+                                <span className="text-[10px] text-white font-bold">ShotPay</span>
+                              </div>
                             </div>
                           </div>
                         </div>
-                        <span className="text-xs font-bold text-[#4C773B] whitespace-nowrap">
-                          ${(product.price / 6).toFixed(2)}<span className="text-[10px] font-normal text-white/70">/mo</span>
-                        </span>
                       </div>
-                    </div>
+                    ) : (
+                      <div className="mb-3 p-2 bg-[#0C0D0C] border border-[#4C773B]/30 rounded">
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="flex items-center space-x-1.5 flex-1 min-w-0">
+                            <ShieldLogo size="sm" className="h-5 w-5 flex-shrink-0" />
+                            <div className="min-w-0">
+                              <div className="flex items-center space-x-1">
+                                <span className="text-[10px] text-white font-bold">Pay in 6</span>
+                                <span className="text-[9px] text-white/60">by</span>
+                                <span className="text-[10px] text-white font-bold">ShotPay</span>
+                              </div>
+                            </div>
+                          </div>
+                          <span className="text-xs font-bold text-[#4C773B] whitespace-nowrap">
+                            ${(product.price / 6).toFixed(2)}<span className="text-[10px] font-normal text-white/70">/mo</span>
+                          </span>
+                        </div>
+                      </div>
+                    )}
                     <button 
                       onClick={(e) => {
                         e.preventDefault();

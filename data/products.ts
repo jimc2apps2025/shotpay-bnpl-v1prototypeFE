@@ -2,7 +2,7 @@ export interface Product {
   id: number;
   name: string;
   price: number;
-  category: 'firearm' | 'ammunition' | 'accessory';
+  category: 'rifle' | 'pistol' | 'ammunition' | 'accessory' | 'target';
   description: string;
   image: string;
   features: string[];
@@ -16,6 +16,8 @@ export interface Product {
     rounds?: number;
     grain?: number | string;
     type?: string;
+    size?: string;
+    material?: string;
   };
   inStock: boolean;
   fflRequired: boolean;
@@ -26,7 +28,7 @@ export const products: Product[] = [
     id: 1,
     name: 'Glock 19 Gen 5 9mm Pistol',
     price: 549.99,
-    category: 'firearm',
+    category: 'pistol',
     image: '/images/products/glock-19-gen5.png',
     description: 'The Glock 19 Gen 5 is a compact, versatile 9mm pistol perfect for concealed carry and home defense. This fifth generation model features improved ergonomics, enhanced grip texture, and the Glock Marksman Barrel for improved accuracy. The ambidextrous slide stop lever makes it suitable for both right and left-handed shooters.',
     features: [
@@ -54,7 +56,7 @@ export const products: Product[] = [
     id: 2,
     name: 'Smith & Wesson M&P15 Sport II AR-15',
     price: 749.99,
-    category: 'firearm',
+    category: 'rifle',
     image: '/images/products/smith-wesson-mp15.jpg',
     description: 'The M&P15 Sport II is a reliable, feature-rich AR-15 platform rifle built for performance and value. This modern sporting rifle features a 16" barrel, Magpul MBUS flip-up sights, and a 6-position collapsible stock. Perfect for target shooting, home defense, and recreational use.',
     features: [
@@ -82,7 +84,7 @@ export const products: Product[] = [
     id: 3,
     name: 'Remington 870 Express 12 Gauge Shotgun',
     price: 429.99,
-    category: 'firearm',
+    category: 'rifle',
     image: '/images/products/remington-870.png',
     description: 'The Remington 870 Express is one of the most popular pump-action shotguns ever made. Known for its reliability and versatility, this 12-gauge shotgun is perfect for hunting, home defense, and sport shooting. Features a durable synthetic stock and matte finish.',
     features: [
@@ -182,7 +184,7 @@ export const products: Product[] = [
     id: 7,
     name: 'Sig Sauer P320 Compact 9mm Pistol',
     price: 599.99,
-    category: 'firearm',
+    category: 'pistol',
     image: '/images/products/sig-p320.jpg',
     description: 'The Sig Sauer P320 Compact is a modular, striker-fired pistol that offers exceptional ergonomics and reliability. The P320 features a removable fire control unit that allows for easy customization. This compact model is perfect for concealed carry.',
     features: [
@@ -226,6 +228,99 @@ export const products: Product[] = [
       rounds: 25,
       grain: 115,
       type: 'FTX (Hollow Point)',
+    },
+    inStock: true,
+    fflRequired: false,
+  },
+  {
+    id: 9,
+    name: 'Champion Paper Target - 12" x 18"',
+    price: 8.99,
+    category: 'target',
+    image: '/images/products/champion-paper-target.jpg',
+    description: 'Professional-grade paper targets perfect for indoor and outdoor shooting ranges. These 12" x 18" targets feature clear scoring rings and are designed for use with pistols and rifles. Made from high-quality paper that provides excellent visibility and clean hole definition.',
+    features: [
+      '12" x 18" standard size',
+      'Clear scoring rings',
+      'High-visibility design',
+      'Works with all calibers',
+      'Pack of 25 targets',
+      'Professional quality paper',
+    ],
+    specifications: {
+      size: '12" x 18"',
+      material: 'Paper',
+      type: 'Standard Bullseye',
+    },
+    inStock: true,
+    fflRequired: false,
+  },
+  {
+    id: 10,
+    name: 'Steel Gong Target - 8" Round',
+    price: 89.99,
+    category: 'target',
+    image: '/images/products/steel-gong-target.jpg',
+    description: 'Durable 8" round steel gong target designed for long-range shooting practice. Made from AR500 steel, this target provides excellent feedback with a satisfying "ping" sound on impact. Perfect for rifle practice at distances of 100+ yards.',
+    features: [
+      '8" diameter round target',
+      'AR500 hardened steel',
+      'Self-healing design',
+      'Loud audible feedback',
+      'Weather resistant',
+      'Mounting hardware included',
+    ],
+    specifications: {
+      size: '8" diameter',
+      material: 'AR500 Steel',
+      type: 'Gong',
+      weight: '5 lbs',
+    },
+    inStock: true,
+    fflRequired: false,
+  },
+  {
+    id: 11,
+    name: 'Self-Adhesive Target Stickers - 6"',
+    price: 12.99,
+    category: 'target',
+    image: '/images/products/target-stickers.jpg',
+    description: 'Convenient self-adhesive target stickers in 6" diameter. These stickers can be applied to any surface for quick target setup. Perfect for indoor ranges, backyard practice, or when you need a quick target solution. Pack includes 50 stickers with various designs.',
+    features: [
+      '6" diameter stickers',
+      'Self-adhesive backing',
+      'Pack of 50 stickers',
+      'Multiple designs included',
+      'Easy to apply and remove',
+      'Works on any surface',
+    ],
+    specifications: {
+      size: '6" diameter',
+      material: 'Vinyl',
+      type: 'Sticker',
+    },
+    inStock: true,
+    fflRequired: false,
+  },
+  {
+    id: 12,
+    name: 'Reactive Target - Splatterburst',
+    price: 19.99,
+    category: 'target',
+    image: '/images/products/splatterburst-target.jpg',
+    description: 'High-visibility reactive targets that create bright splatter marks on impact, making it easy to see your shots even at long distances. These targets are perfect for training and improving accuracy. The bright colors provide excellent visibility in all lighting conditions.',
+    features: [
+      'Bright splatter on impact',
+      'High visibility design',
+      'Works at long distances',
+      'Weather resistant',
+      'Pack of 10 targets',
+      'Standard 12" x 18" size',
+    ],
+    specifications: {
+      size: '12" x 18"',
+      material: 'Synthetic',
+      type: 'Reactive',
     },
     inStock: true,
     fflRequired: false,

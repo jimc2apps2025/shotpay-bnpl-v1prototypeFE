@@ -62,6 +62,20 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     router.push('/checkout?payment=bnpl&plan=pay6');
   };
 
+  const handleSubscriptionClick = () => {
+    // Add product to cart if not already there
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: quantity,
+      image: product.image,
+      fflRequired: product.fflRequired,
+    });
+    // Navigate to checkout with subscription pre-selected
+    router.push('/checkout?payment=subscription&plan=monthly');
+  };
+
   return (
     <>
       <div className="min-h-screen bg-[#FCFCFC] py-4 sm:py-8">
@@ -116,31 +130,52 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   )}
                 </div>
                 
-                {/* BNPL Monthly Payment */}
-                <button
-                  onClick={handlePayIn6Click}
-                  className="w-full mb-4 sm:mb-6 p-3 sm:p-4 bg-[#0C0D0C] border border-[#4C773B]/30 rounded-lg hover:border-[#4C773B]/50 hover:bg-[#0C0D0C]/90 transition-all cursor-pointer text-left"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <ShieldLogo size="sm" className="h-8 w-8 sm:h-10 sm:w-10 flex-shrink-0" />
-                      <div>
-                        <div className="flex items-center space-x-2 mb-1">
-                          <p className="text-xs sm:text-sm text-white font-bold">Pay in 6</p>
-                          <span className="text-[10px] sm:text-xs text-white/70">by</span>
-                          <p className="text-xs sm:text-sm text-white font-bold">ShotPay</p>
+                {/* Payment Option */}
+                {product.category === 'ammunition' || product.category === 'target' ? (
+                  <button
+                    onClick={handleSubscriptionClick}
+                    className="w-full mb-4 sm:mb-6 p-3 sm:p-4 bg-[#0C0D0C] border border-[#4C773B]/30 rounded-lg hover:border-[#4C773B]/50 hover:bg-[#0C0D0C]/90 transition-all cursor-pointer text-left"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <ShieldLogo size="sm" className="h-8 w-8 sm:h-10 sm:w-10 flex-shrink-0" />
+                        <div>
+                          <div className="flex items-center space-x-2 mb-1">
+                            <p className="text-xs sm:text-sm text-white font-bold">Subscription Based</p>
+                            <span className="text-[10px] sm:text-xs text-white/70">by</span>
+                            <p className="text-xs sm:text-sm text-white font-bold">ShotPay</p>
+                          </div>
+                          <p className="text-xs text-white/70">Recurring monthly delivery</p>
                         </div>
-                        <p className="text-xs text-white/70">6 monthly payments • No interest</p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <p className="text-lg sm:text-xl font-bold text-[#4C773B]">
-                        ${(product.price / 6).toFixed(2)}<span className="text-xs sm:text-sm font-normal text-white/70">/mo</span>
-                      </p>
-                      <p className="text-xs text-white/70">Total: ${product.price.toFixed(2)}</p>
+                  </button>
+                ) : (
+                  <button
+                    onClick={handlePayIn6Click}
+                    className="w-full mb-4 sm:mb-6 p-3 sm:p-4 bg-[#0C0D0C] border border-[#4C773B]/30 rounded-lg hover:border-[#4C773B]/50 hover:bg-[#0C0D0C]/90 transition-all cursor-pointer text-left"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <ShieldLogo size="sm" className="h-8 w-8 sm:h-10 sm:w-10 flex-shrink-0" />
+                        <div>
+                          <div className="flex items-center space-x-2 mb-1">
+                            <p className="text-xs sm:text-sm text-white font-bold">Pay in 6</p>
+                            <span className="text-[10px] sm:text-xs text-white/70">by</span>
+                            <p className="text-xs sm:text-sm text-white font-bold">ShotPay</p>
+                          </div>
+                          <p className="text-xs text-white/70">6 monthly payments • No interest</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-lg sm:text-xl font-bold text-[#4C773B]">
+                          ${(product.price / 6).toFixed(2)}<span className="text-xs sm:text-sm font-normal text-white/70">/mo</span>
+                        </p>
+                        <p className="text-xs text-white/70">Total: ${product.price.toFixed(2)}</p>
+                      </div>
                     </div>
-                  </div>
-                </button>
+                  </button>
+                )}
 
                 {/* Quantity Selector */}
                 {product.inStock && (

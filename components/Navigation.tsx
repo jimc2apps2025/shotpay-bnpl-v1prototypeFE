@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useCart } from '@/contexts/CartContext';
 import ShieldLogo from './ShieldLogo';
 
@@ -21,14 +20,14 @@ export default function Navigation() {
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
+            <Link href="/" className="text-white hover:text-[#4C773B] transition-colors font-medium">
+              Home
+            </Link>
             <Link href="/products" className="text-white hover:text-[#4C773B] transition-colors font-medium">
               Products
             </Link>
-            <Link href="/ffl-dealers" className="text-white hover:text-[#4C773B] transition-colors font-medium">
-              FFL Dealers
-            </Link>
-            <Link href="/dashboard" className="text-white hover:text-[#4C773B] transition-colors font-medium">
-              Dashboard
+            <Link href="/cta" className="text-white hover:text-[#4C773B] transition-colors font-medium">
+              CTA
             </Link>
             <Link href="/cart" className="relative text-white hover:text-[#4C773B] transition-colors">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -40,16 +39,6 @@ export default function Navigation() {
                 </span>
               )}
             </Link>
-            <div className="flex items-center">
-              <Image
-                src="/header-image.png"
-                alt="Header"
-                width={120}
-                height={40}
-                className="h-8 w-auto object-contain"
-                priority
-              />
-            </div>
           </div>
 
           {/* Mobile Menu Button & Cart */}
@@ -64,16 +53,6 @@ export default function Navigation() {
                 </span>
               )}
             </Link>
-            <div className="flex items-center">
-              <Image
-                src="/header-image.png"
-                alt="Header"
-                width={100}
-                height={32}
-                className="h-6 w-auto object-contain"
-                priority
-              />
-            </div>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-white hover:text-[#4C773B] transition-colors p-2"
@@ -95,6 +74,13 @@ export default function Navigation() {
           <div className="md:hidden border-t border-white/10 bg-[#0C0D0C]">
             <div className="flex flex-col py-4 space-y-3">
               <Link
+                href="/"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-4 py-2 text-white hover:text-[#4C773B] hover:bg-white/5 transition-colors font-medium"
+              >
+                Home
+              </Link>
+              <Link
                 href="/products"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="px-4 py-2 text-white hover:text-[#4C773B] hover:bg-white/5 transition-colors font-medium"
@@ -102,18 +88,11 @@ export default function Navigation() {
                 Products
               </Link>
               <Link
-                href="/ffl-dealers"
+                href="/cta"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="px-4 py-2 text-white hover:text-[#4C773B] hover:bg-white/5 transition-colors font-medium"
               >
-                FFL Dealers
-              </Link>
-              <Link
-                href="/dashboard"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-2 text-white hover:text-[#4C773B] hover:bg-white/5 transition-colors font-medium"
-              >
-                Dashboard
+                CTA
               </Link>
             </div>
           </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import { CartProvider } from "@/contexts/CartContext";
 
 const poppins = Poppins({
@@ -28,6 +29,7 @@ export default function RootLayout({
         <CartProvider>
           <Navigation />
           {children}
+          <Footer />
         </CartProvider>
       </body>
     </html>
