@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import ConditionalNavigation from "@/components/ConditionalNavigation";
 import { CartProvider } from "@/contexts/CartContext";
 
 const poppins = Poppins({
@@ -27,9 +26,9 @@ export default function RootLayout({
         className={`${poppins.variable} antialiased`}
       >
         <CartProvider>
-          <Navigation />
-          {children}
-          <Footer />
+          <ConditionalNavigation>
+            {children}
+          </ConditionalNavigation>
         </CartProvider>
       </body>
     </html>

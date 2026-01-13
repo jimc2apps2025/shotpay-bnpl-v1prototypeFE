@@ -23,14 +23,9 @@ export default function Navigation() {
             <Link href="/" className="text-white hover:text-[#4C773B] transition-colors font-medium">
               Home
             </Link>
-            <a 
-              href="https://merchant-dashboard-2aapps.vercel.app/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-white hover:text-[#4C773B] transition-colors font-medium"
-            >
+            <Link href="/dashboard" className="text-white hover:text-[#4C773B] transition-colors font-medium">
               Merchant Dashboard
-            </a>
+            </Link>
             <Link href="/cart" className="relative text-white hover:text-[#4C773B] transition-colors">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
@@ -82,15 +77,13 @@ export default function Navigation() {
               >
                 Home
               </Link>
-              <a
-                href="https://merchant-dashboard-2aapps.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/dashboard"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="px-4 py-2 text-white hover:text-[#4C773B] hover:bg-white/5 transition-colors font-medium"
               >
                 Merchant Dashboard
-              </a>
+              </Link>
             </div>
           </div>
         )}

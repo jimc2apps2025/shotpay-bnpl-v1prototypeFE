@@ -91,3 +91,19 @@ body {
   }
 }
 
+/* Shopify-style dashboard colors and utilities */
+@layer utilities {
+  .shopify-card {
+    @apply bg-white border border-shopify-border rounded-lg shadow-sm;
+  }
+}
+
+@theme {
+  --color-shopify-green: #008060;
+  --color-shopify-lightGreen: #f1f8f5;
+  --color-shopify-darkGreen: #004c3f;
+  --color-shopify-gray: #f6f6f7;
+  --color-shopify-border: #e1e3e5;
+  --color-shopify-text: #202223;
+  --color-shopify-subdued: #6d7175;
+}
