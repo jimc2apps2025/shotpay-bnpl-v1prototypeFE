@@ -55,8 +55,9 @@ function CheckoutContent() {
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const tax = subtotal * 0.08;
   const shipping = subtotal > 100 ? 0 : 9.99;
-  const transactionFee = (paymentMethod === 'bnpl' || paymentMethod === 'subscription') ? 2.00 : 0;
-  const total = subtotal + tax + shipping + transactionFee;
+  const platformServicesFee = (paymentMethod === 'bnpl' || paymentMethod === 'subscription') ? 1.00 : 0;
+  const donationFee = 1.00;
+  const total = subtotal + tax + shipping + platformServicesFee + donationFee;
 
   // Redirect to cart if empty
   if (items.length === 0) {
@@ -349,12 +350,16 @@ function CheckoutContent() {
                   <span>Tax</span>
                   <span>${tax.toFixed(2)}</span>
                 </div>
-                {transactionFee > 0 && (
+                {platformServicesFee > 0 && (
                   <div className="flex justify-between text-gray-600">
-                    <span>Transaction Fee</span>
-                    <span>${transactionFee.toFixed(2)}</span>
+                    <span>Platform Services Fee</span>
+                    <span>${platformServicesFee.toFixed(2)}</span>
                   </div>
                 )}
+                <div className="flex justify-between text-gray-600">
+                  <span>Non For profit donation</span>
+                  <span>${donationFee.toFixed(2)}</span>
+                </div>
                 <div className="border-t pt-2 flex justify-between text-lg font-bold">
                   <span>Total</span>
                   <span>${total.toFixed(2)}</span>
