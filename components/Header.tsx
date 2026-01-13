@@ -9,7 +9,7 @@ interface HeaderProps {
 
 export const Header = ({ onOpenSidebar }: HeaderProps) => {
   return (
-    <header className="h-16 bg-white border-b border-shopify-border sticky top-0 z-30 px-4 lg:px-6 flex items-center justify-between">
+    <header className="h-16 bg-white border-b border-shopify-border sticky top-0 z-20 px-4 lg:px-6 flex items-center justify-between">
       <div className="flex items-center flex-1">
         <button 
           onClick={onOpenSidebar}

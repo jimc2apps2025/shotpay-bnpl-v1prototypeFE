@@ -21,14 +21,14 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
       {/* Mobile Backdrop */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden" 
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden" 
           onClick={onClose}
         />
       )}
 
       {/* Sidebar */}
       <aside className={cn(
-        "fixed inset-y-0 left-0 z-50 w-64 bg-shopify-gray border-r border-shopify-border transition-transform duration-300 transform lg:translate-x-0 lg:static lg:inset-0",
+        "fixed inset-y-0 left-0 z-40 w-64 bg-shopify-gray border-r border-shopify-border transition-transform duration-300 transform lg:translate-x-0 lg:static lg:inset-0",
         isOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <div className="flex flex-col h-full">
