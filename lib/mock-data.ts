@@ -22,7 +22,7 @@ export const NAV_ITEMS = [
   { name: "Analytics", icon: BarChart2, href: "/dashboard/analytics", disabled: true },
   { name: "Marketing", icon: Bell, href: "/dashboard/marketing", disabled: true },
   { name: "Discounts", icon: Tag, href: "/dashboard/discounts", disabled: true },
-  { name: "Finance", icon: Wallet, href: "/dashboard/finance/payouts", disabled: false },
+  { name: "Shotpay Finance", icon: Wallet, href: "/dashboard/finance/payouts", disabled: false },
 ];
 
 export const SECONDARY_NAV_ITEMS = [
