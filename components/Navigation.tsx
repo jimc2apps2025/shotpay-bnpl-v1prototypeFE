@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/contexts/CartContext';
-import ShieldLogo from './ShieldLogo';
+import MainLogo from './MainLogo';
 
 export default function Navigation() {
   const { getTotalItems } = useCart();
@@ -15,7 +15,7 @@ export default function Navigation() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center">
-            <ShieldLogo size="sm" className="h-10 w-10 md:h-12 md:w-12" />
+            <MainLogo size="sm" className="h-10 w-10 md:h-12 md:w-12" />
           </Link>
           
           {/* Desktop Navigation */}
@@ -23,11 +23,8 @@ export default function Navigation() {
             <Link href="/" className="text-white hover:text-[#4C773B] transition-colors font-medium">
               Home
             </Link>
-            <Link href="/products" className="text-white hover:text-[#4C773B] transition-colors font-medium">
-              Products
-            </Link>
-            <Link href="/cta" className="text-white hover:text-[#4C773B] transition-colors font-medium">
-              CTA
+            <Link href="/dashboard" className="text-white hover:text-[#4C773B] transition-colors font-medium">
+              Merchant Dashboard
             </Link>
             <Link href="/cart" className="relative text-white hover:text-[#4C773B] transition-colors">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -81,18 +78,11 @@ export default function Navigation() {
                 Home
               </Link>
               <Link
-                href="/products"
+                href="/dashboard"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="px-4 py-2 text-white hover:text-[#4C773B] hover:bg-white/5 transition-colors font-medium"
               >
-                Products
-              </Link>
-              <Link
-                href="/cta"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-2 text-white hover:text-[#4C773B] hover:bg-white/5 transition-colors font-medium"
-              >
-                CTA
+                Merchant Dashboard
               </Link>
             </div>
           </div>

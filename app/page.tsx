@@ -1,21 +1,23 @@
-import Image from 'next/image';
+import HomeProductsSection from '@/components/HomeProductsSection';
+import HeroVideoModal from '@/components/HeroVideoModal';
+import HomeCtaSection from "@/components/HomeCtaSection";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#0C0D0C]">
-      {/* Hero Banner Section */}
-      <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/home-banner.webp"
-            alt="Pay-in-4 Financing for the Shooting, Hunting, Outdoor & Tactical Industry"
-            fill
-            className="object-cover object-center"
-            priority
-            quality={90}
-          />
-        </div>
-      </section>
+    <div className="min-h-screen">
+      {/* Clickable Hero (500px tall, contained image, opens video modal) */}
+     <HeroVideoModal
+       maxHeightPx={500}
+       aspectRatio={2560 / 938} // IMPORTANT: set to your banner’s real ratio
+       backgroundColor="#000000"
+       backgroundImageUrl="/home-banner-v2.png"
+       videoUrl="https://shotpay.com/wp-content/uploads/2026/01/Video-final.mp4"
+     />
+
+      {/* Products Section under hero */}
+      <HomeProductsSection />
+        
+      <HomeCtaSection />
     </div>
   );
 }

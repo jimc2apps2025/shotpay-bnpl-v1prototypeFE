@@ -30,6 +30,10 @@ body {
   font-family: var(--font-poppins), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+
+
+
+
 @keyframes slide-in {
   from {
     transform: translateX(100%);
@@ -86,3 +90,4 @@ body {
     min-width: 44px;
   }
 }
+
