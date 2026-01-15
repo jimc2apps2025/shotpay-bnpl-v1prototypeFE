@@ -97,26 +97,6 @@ export default function ProductsPage() {
               >
                 Pistol
               </button>
-              <button
-                onClick={() => setSelectedCategory('ammunition')}
-                className={`px-3 md:px-4 py-2 rounded-lg transition-colors font-medium whitespace-nowrap text-sm md:text-base ${
-                  selectedCategory === 'ammunition'
-                    ? 'bg-[#4C773B] text-white'
-                    : 'bg-white text-[#0C0D0C] border border-[#192B17]/20 hover:bg-[#192B17]/5'
-                }`}
-              >
-                Ammunition
-              </button>
-              <button
-                onClick={() => setSelectedCategory('target')}
-                className={`px-3 md:px-4 py-2 rounded-lg transition-colors font-medium whitespace-nowrap text-sm md:text-base ${
-                  selectedCategory === 'target'
-                    ? 'bg-[#4C773B] text-white'
-                    : 'bg-white text-[#0C0D0C] border border-[#192B17]/20 hover:bg-[#192B17]/5'
-                }`}
-              >
-                Target
-              </button>
             </div>
           </div>
         </div>
