@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import ConditionalNavigation from "@/components/ConditionalNavigation";
 import { CartProvider } from "@/contexts/CartContext";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 const poppins = Poppins({
   weight: ['400', '600', '700'],
@@ -25,11 +26,13 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} antialiased`}
       >
-        <CartProvider>
-          <ConditionalNavigation>
-            {children}
-          </ConditionalNavigation>
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <ConditionalNavigation>
+              {children}
+            </ConditionalNavigation>
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );
