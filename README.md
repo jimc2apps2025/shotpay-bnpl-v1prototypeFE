@@ -275,7 +275,7 @@ NEXT_PUBLIC_PERSONA_TEMPLATE_ID=tmpl_xxx
 
 ## Author
 
-Drew Thomsen
+Shotpay DEVS!
 
 ---
 
