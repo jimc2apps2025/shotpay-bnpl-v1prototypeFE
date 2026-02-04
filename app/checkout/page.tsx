@@ -456,9 +456,7 @@ function CheckoutContent() {
                 {paymentMethod === 'bnpl' ? 'Complete Purchase' : paymentMethod === 'subscription' ? 'Start Subscription' : 'Place Order'}
               </button>
 
-              <p className="text-xs text-gray-500 mt-4 text-center">
-                ¹Pay later loans are originated by WebBank or Sezzle. Refer to your loan agreement for lender information.
-              </p>
+           
             </div>
           </div>
         </div>
