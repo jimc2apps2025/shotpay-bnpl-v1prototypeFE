@@ -19,6 +19,7 @@
  * Version  | Date       | Author        | Change Description
  * ---------|------------|---------------|------------------------------------
  * 1.0.0    | 2026-02-01 | Drew Thomsen  | Initial implementation
+ * 1.1.0    | 2026-02-04 | Drew Thomsen  | SP-002: Align KycStatus with backend
  *
  * ============================================================================
  * LICENSE: Proprietary
@@ -46,35 +47,30 @@ interface KYCStatusBadgeProps {
 // ============================================================================
 
 const StatusIcons: Record<string, React.ReactNode> = {
-  not_started: (
+  NOT_STARTED: (
     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
   ),
-  pending: (
+  PENDING: (
     <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
     </svg>
   ),
-  verified: (
+  VERIFIED: (
     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
   ),
-  failed: (
+  FAILED: (
     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
   ),
-  review_required: (
+  REVIEW_REQUIRED: (
     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-    </svg>
-  ),
-  expired: (
-    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
   ),
 };
@@ -84,12 +80,11 @@ const StatusIcons: Record<string, React.ReactNode> = {
 // ============================================================================
 
 const StatusBgColors: Record<string, string> = {
-  not_started: 'bg-gray-100',
-  pending: 'bg-yellow-100',
-  verified: 'bg-green-100',
-  failed: 'bg-red-100',
-  review_required: 'bg-blue-100',
-  expired: 'bg-orange-100',
+  NOT_STARTED: 'bg-gray-100',
+  PENDING: 'bg-yellow-100',
+  VERIFIED: 'bg-green-100',
+  FAILED: 'bg-red-100',
+  REVIEW_REQUIRED: 'bg-blue-100',
 };
 
 // ============================================================================

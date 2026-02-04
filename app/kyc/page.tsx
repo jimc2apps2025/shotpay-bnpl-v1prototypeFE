@@ -19,6 +19,7 @@
  * Version  | Date       | Author        | Change Description
  * ---------|------------|---------------|------------------------------------
  * 1.0.0    | 2026-02-01 | Drew Thomsen  | Initial implementation
+ * 1.1.0    | 2026-02-04 | Drew Thomsen  | SP-002: Align KycStatus with backend
  *
  * ============================================================================
  * LICENSE: Proprietary
@@ -109,7 +110,7 @@ export default function KYCVerificationPage() {
   }
 
   // Verified state - allow continue
-  if (kycStatus?.status === 'verified') {
+  if (kycStatus?.status === 'VERIFIED') {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="max-w-md w-full mx-4">
@@ -123,7 +124,7 @@ export default function KYCVerificationPage() {
             <p className="text-gray-600 mb-6">
               Your identity has been verified. You can now proceed with your purchase.
             </p>
-            <KYCStatusBadge status="verified" size="lg" className="mb-6" />
+            <KYCStatusBadge status="VERIFIED" size="lg" className="mb-6" />
             <button
               onClick={handleContinue}
               className="w-full py-3 px-4 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
@@ -137,7 +138,7 @@ export default function KYCVerificationPage() {
   }
 
   // Failed state
-  if (kycStatus?.status === 'failed') {
+  if (kycStatus?.status === 'FAILED') {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="max-w-md w-full mx-4">
@@ -151,7 +152,7 @@ export default function KYCVerificationPage() {
             <p className="text-gray-600 mb-4">
               {kycStatus.failureReason || 'We were unable to verify your identity.'}
             </p>
-            <KYCStatusBadge status="failed" size="lg" className="mb-6" />
+            <KYCStatusBadge status="FAILED" size="lg" className="mb-6" />
             {kycStatus.canRetry && (
               <>
                 <p className="text-sm text-gray-500 mb-4">

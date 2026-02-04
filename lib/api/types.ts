@@ -20,6 +20,7 @@
  * Version  | Date       | Author        | Change Description
  * ---------|------------|---------------|------------------------------------
  * 1.0.0    | 2025-01-31 | Drew Thomsen  | Initial implementation
+ * 1.1.0    | 2026-02-04 | Drew Thomsen  | SP-002: Align KycStatus with backend
  *
  * ============================================================================
  * AUTHOR INFORMATION:
@@ -213,14 +214,15 @@ export interface RefreshResponse {
 
 /**
  * KYC verification status
+ * IMPORTANT: These values MUST match the backend enum exactly (UPPERCASE)
+ * Source of truth: shotpay-backend/src/constants/enums.ts (KycStatus enum)
  */
 export type KycStatus =
-  | 'not_started'
-  | 'pending'
-  | 'in_progress'
-  | 'approved'
-  | 'denied'
-  | 'expired';
+  | 'NOT_STARTED'
+  | 'PENDING'
+  | 'VERIFIED'
+  | 'FAILED'
+  | 'REVIEW_REQUIRED';
 
 /**
  * KYC session creation response
@@ -233,12 +235,14 @@ export interface KycSessionResponse {
 
 /**
  * KYC status check response
+ * Source of truth: Backend GET /kyc/status endpoint
  */
 export interface KycStatusResponse {
   status: KycStatus;
   verifiedAt?: string;
-  deniedReason?: string;
-  age?: number;
+  failureReason?: string;
+  canRetry?: boolean;
+  attemptsRemaining?: number;
 }
 
 // ============================================================================

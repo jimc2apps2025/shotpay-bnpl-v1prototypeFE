@@ -19,6 +19,7 @@
  * Version  | Date       | Author        | Change Description
  * ---------|------------|---------------|------------------------------------
  * 1.0.0    | 2026-02-01 | Drew Thomsen  | Initial implementation
+ * 1.1.0    | 2026-02-04 | Drew Thomsen  | SP-002: Align KycStatus with backend
  *
  * ============================================================================
  * LICENSE: Proprietary
@@ -90,16 +91,16 @@ export default function KYCCallbackPage() {
 
   const updateMessage = (currentStatus: KycStatusResponse) => {
     switch (currentStatus.status) {
-      case 'pending':
+      case 'PENDING':
         setMessage('Processing your verification...');
         break;
-      case 'review_required':
+      case 'REVIEW_REQUIRED':
         setMessage('Your verification is under review...');
         break;
-      case 'verified':
+      case 'VERIFIED':
         setMessage('Verification complete!');
         break;
-      case 'failed':
+      case 'FAILED':
         setMessage('Verification could not be completed.');
         break;
       default:
@@ -115,11 +116,11 @@ export default function KYCCallbackPage() {
 
     // Redirect after a short delay to show the result
     setTimeout(() => {
-      if (finalStatus.status === 'verified') {
+      if (finalStatus.status === 'VERIFIED') {
         router.push(returnUrl);
-      } else if (finalStatus.status === 'failed') {
+      } else if (finalStatus.status === 'FAILED') {
         router.push('/kyc?status=failed');
-      } else if (finalStatus.status === 'review_required') {
+      } else if (finalStatus.status === 'REVIEW_REQUIRED') {
         // Stay on page, show review message
       } else {
         // Still pending after timeout - redirect to KYC page
@@ -149,7 +150,7 @@ export default function KYCCallbackPage() {
   }
 
   // Verified - success state
-  if (status?.status === 'verified') {
+  if (status?.status === 'VERIFIED') {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="max-w-md w-full mx-4">
@@ -163,7 +164,7 @@ export default function KYCCallbackPage() {
             <p className="text-gray-600 mb-6">
               Your identity has been verified. You can now complete your purchase.
             </p>
-            <KYCStatusBadge status="verified" size="lg" className="mb-6" />
+            <KYCStatusBadge status="VERIFIED" size="lg" className="mb-6" />
             <button
               onClick={handleContinue}
               className="w-full py-3 px-4 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
@@ -177,7 +178,7 @@ export default function KYCCallbackPage() {
   }
 
   // Failed state
-  if (status?.status === 'failed') {
+  if (status?.status === 'FAILED') {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="max-w-md w-full mx-4">
@@ -191,7 +192,7 @@ export default function KYCCallbackPage() {
             <p className="text-gray-600 mb-4">
               {status.failureReason || 'We were unable to verify your identity.'}
             </p>
-            <KYCStatusBadge status="failed" size="lg" className="mb-6" />
+            <KYCStatusBadge status="FAILED" size="lg" className="mb-6" />
             {status.canRetry && (
               <button
                 onClick={handleRetry}
@@ -212,7 +213,7 @@ export default function KYCCallbackPage() {
   }
 
   // Review required state
-  if (status?.status === 'review_required') {
+  if (status?.status === 'REVIEW_REQUIRED') {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="max-w-md w-full mx-4">
@@ -227,7 +228,7 @@ export default function KYCCallbackPage() {
             <p className="text-gray-600 mb-6">
               Your verification is being reviewed manually. This usually takes a few minutes but may take up to 24 hours.
             </p>
-            <KYCStatusBadge status="review_required" size="lg" className="mb-6" />
+            <KYCStatusBadge status="REVIEW_REQUIRED" size="lg" className="mb-6" />
             <p className="text-sm text-gray-500">
               We'll notify you by email once the review is complete.
             </p>

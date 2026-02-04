@@ -22,6 +22,7 @@
  * Version  | Date       | Author        | Change Description
  * ---------|------------|---------------|------------------------------------
  * 1.0.0    | 2025-01-31 | Drew Thomsen  | Initial implementation
+ * 1.1.0    | 2026-02-04 | Drew Thomsen  | SP-002: Align KycStatus with backend
  *
  * ============================================================================
  * AUTHOR INFORMATION:
@@ -39,14 +40,14 @@
  * Check KYC status:
  *   import { kycApi } from '@/lib/api/kyc';
  *   const status = await kycApi.getStatus();
- *   if (status.status !== 'approved') {
+ *   if (status.status !== 'VERIFIED') {
  *     const session = await kycApi.createSession();
  *     window.location.href = session.sessionUrl;
  *   }
  *
  * Poll for completion:
  *   await kycApi.pollStatus((status) => {
- *     if (status.status === 'approved') {
+ *     if (status.status === 'VERIFIED') {
  *       // Proceed with checkout
  *     }
  *   });
@@ -125,7 +126,7 @@ export const kycApi = {
     customerId: string,
     callbackUrl: string
   ): Promise<KycSessionResponse> {
-    return apiClient.post<KycSessionResponse>(ENDPOINTS.KYC.SESSION, {
+    return apiClient.post<KycSessionResponse>(ENDPOINTS.KYC.CREATE_SESSION, {
       customerId,
       callbackUrl,
     });
@@ -143,7 +144,7 @@ export const kycApi = {
   async isVerified(customerId?: string): Promise<boolean> {
     try {
       const status = await this.getStatus(customerId);
-      return status.status === 'verified';
+      return status.status === 'VERIFIED';
     } catch {
       return false;
     }
@@ -161,7 +162,7 @@ export const kycApi = {
   async needsVerification(customerId?: string): Promise<boolean> {
     try {
       const status = await this.getStatus(customerId);
-      return status.status === 'not_started' || status.status === 'expired';
+      return status.status === 'NOT_STARTED' || status.status === 'FAILED';
     } catch {
       return true;
     }
@@ -179,7 +180,7 @@ export const kycApi = {
   async isPending(customerId?: string): Promise<boolean> {
     try {
       const status = await this.getStatus(customerId);
-      return status.status === 'pending' || status.status === 'review_required';
+      return status.status === 'PENDING' || status.status === 'REVIEW_REQUIRED';
     } catch {
       return false;
     }
@@ -219,7 +220,7 @@ export const kycApi = {
           }
 
           // Check for terminal states
-          if (status.status === 'verified' || status.status === 'failed') {
+          if (status.status === 'VERIFIED' || status.status === 'FAILED') {
             resolve(status);
             return;
           }
@@ -258,7 +259,7 @@ export const kycApi = {
     callbackUrl: string
   ): Promise<string> {
     const session = await this.createSession(customerId, callbackUrl);
-    return session.kycUrl || '';
+    return session.sessionUrl || '';
   },
 
   /**
@@ -303,12 +304,11 @@ export const kycApi = {
  */
 export function getKycStatusLabel(status: KycStatus): string {
   const labels: Record<string, string> = {
-    not_started: 'Not Started',
-    pending: 'Pending Verification',
-    verified: 'Verified',
-    failed: 'Verification Failed',
-    review_required: 'Under Review',
-    expired: 'Session Expired',
+    NOT_STARTED: 'Not Started',
+    PENDING: 'Pending Verification',
+    VERIFIED: 'Verified',
+    FAILED: 'Verification Failed',
+    REVIEW_REQUIRED: 'Under Review',
   };
 
   return labels[status] || status;
@@ -325,12 +325,11 @@ export function getKycStatusLabel(status: KycStatus): string {
  */
 export function getKycStatusColor(status: KycStatus): string {
   const colors: Record<string, string> = {
-    not_started: 'text-gray-500',
-    pending: 'text-yellow-500',
-    verified: 'text-green-500',
-    failed: 'text-red-500',
-    review_required: 'text-blue-500',
-    expired: 'text-orange-500',
+    NOT_STARTED: 'text-gray-500',
+    PENDING: 'text-yellow-500',
+    VERIFIED: 'text-green-500',
+    FAILED: 'text-red-500',
+    REVIEW_REQUIRED: 'text-blue-500',
   };
 
   return colors[status] || 'text-gray-500';
