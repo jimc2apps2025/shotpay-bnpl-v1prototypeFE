@@ -20,6 +20,7 @@
  * ---------|------------|---------------|------------------------------------
  * 1.0.0    | 2026-02-01 | Drew Thomsen  | Initial implementation
  * 1.1.0    | 2026-02-04 | Drew Thomsen  | SP-002: Align KycStatus with backend
+ * 1.2.0    | 2026-02-04 | Drew Thomsen  | Add Suspense boundary for useSearchParams
  *
  * ============================================================================
  * LICENSE: Proprietary
@@ -27,7 +28,7 @@
  * ============================================================================
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { kycApi } from '@/lib/api/kyc';
 import type { KycStatusResponse } from '@/lib/api/types';
@@ -35,10 +36,25 @@ import { KYCStatusBadge } from '@/components/KYCStatusBadge';
 import { useAuth } from '@/contexts/AuthContext';
 
 // ============================================================================
-// PAGE COMPONENT
+// LOADING FALLBACK
 // ============================================================================
 
-export default function KYCCallbackPage() {
+function LoadingFallback() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+        <p className="mt-4 text-gray-600">Loading...</p>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================================
+// INNER COMPONENT (uses useSearchParams)
+// ============================================================================
+
+function KYCCallbackContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
@@ -139,14 +155,7 @@ export default function KYCCallbackPage() {
 
   // Loading state
   if (authLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
-        </div>
-      </div>
-    );
+    return <LoadingFallback />;
   }
 
   // Verified - success state
@@ -282,5 +291,17 @@ export default function KYCCallbackPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+// ============================================================================
+// PAGE COMPONENT (with Suspense boundary)
+// ============================================================================
+
+export default function KYCCallbackPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <KYCCallbackContent />
+    </Suspense>
   );
 }
