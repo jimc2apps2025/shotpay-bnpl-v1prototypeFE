@@ -40,8 +40,8 @@ export default function HomeProductsSection() {
 	const FEATURED_PRODUCT_IDS = [
 	1,
 	2,
-	3,
-	7,
+	9,
+	12,
 	];
 	
 	const filteredProducts = products.filter((product) =>
