@@ -48,7 +48,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     }
   };
 
-  const handlePayIn6Click = () => {
+  const handlePayIn4Click = () => {
     // Add product to cart if not already there
     addToCart({
       id: product.id,
@@ -58,8 +58,8 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
       image: product.image,
       fflRequired: product.fflRequired,
     });
-    // Navigate to checkout with BNPL and Pay in 6 pre-selected
-    router.push('/checkout?payment=bnpl&plan=pay6');
+    // Navigate to checkout with BNPL and Pay in 4 pre-selected
+    router.push('/checkout?payment=bnpl&plan=pay4');
   };
 
   const handleSubscriptionClick = () => {
@@ -152,7 +152,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   </button>
                 ) : (
                   <button
-                    onClick={handlePayIn6Click}
+                    onClick={handlePayIn4Click}
                     className="w-full mb-4 sm:mb-6 p-3 sm:p-4 bg-[#0C0D0C] border border-[#4C773B]/30 rounded-lg hover:border-[#4C773B]/50 hover:bg-[#0C0D0C]/90 transition-all cursor-pointer text-left"
                   >
                     <div className="flex items-center justify-between">
@@ -160,16 +160,16 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                         <ShieldLogo size="sm" className="h-8 w-8 sm:h-10 sm:w-10 flex-shrink-0" />
                         <div>
                           <div className="flex items-center space-x-2 mb-1">
-                            <p className="text-xs sm:text-sm text-white font-bold">Pay in 6</p>
+                            <p className="text-xs sm:text-sm text-white font-bold">Pay in 4</p>
                             <span className="text-[10px] sm:text-xs text-white/70">by</span>
                             <p className="text-xs sm:text-sm text-white font-bold">ShotPay</p>
                           </div>
-                          <p className="text-xs text-white/70">6 monthly payments • No interest</p>
+                          <p className="text-xs text-white/70">4 interest-free payments over 6 weeks</p>
                         </div>
                       </div>
                       <div className="text-right">
                         <p className="text-lg sm:text-xl font-bold text-[#4C773B]">
-                          ${(product.price / 6).toFixed(2)}<span className="text-xs sm:text-sm font-normal text-white/70">/mo</span>
+                          ${(product.price / 4).toFixed(2)}<span className="text-xs sm:text-sm font-normal text-white/70">/payment</span>
                         </p>
                         <p className="text-xs text-white/70">Total: ${product.price.toFixed(2)}</p>
                       </div>

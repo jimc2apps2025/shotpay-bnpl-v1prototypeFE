@@ -310,7 +310,7 @@ export const products: Product[] = [
     name: 'Axil XCOR Wireless Digital Ear Buds with Touch Control',
     price: 149.98,
     category: 'accessory',
-    image: '/images/products/XCOR_product_image_1_ALT.jpg',
+    image: '/images/products/XCOR_product_image_1_ALT_1.jpg',
     description: 'Protect and enhance your hearing with the Axil XCOR Wireless Digital Ear Buds with Touch Control. Experience true wireless digital ear buds with touch control engineered for tactical hearing protection. XCOR digital ear buds deliver up to a 29db single number rating.',
     features: [
       'Wireless digital ear buds with touch control',

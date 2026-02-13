@@ -31,7 +31,7 @@ export default function ProductImage({
   };
 
   const placeholderSvg = (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-gray-200 to-gray-300">
+    <div className="w-full h-full flex flex-col items-center justify-center bg-white">
       <svg
         className="w-24 h-24 text-gray-400"
         fill="none"
@@ -52,14 +52,14 @@ export default function ProductImage({
   // Show placeholder if error or if src is already placeholder
   if (hasError || imgSrc === '/images/products/placeholder.svg') {
     return (
-      <div className={`relative bg-gray-200 flex items-center justify-center overflow-hidden ${className}`}>
+      <div className={`relative bg-white flex items-center justify-center overflow-hidden ${className}`}>
         {placeholderSvg}
       </div>
     );
   }
 
   return (
-    <div className={`relative bg-gray-200 flex items-center justify-center overflow-hidden ${className}`}>
+    <div className={`relative bg-white flex items-center justify-center overflow-hidden ${className}`}>
       <Image
         src={imgSrc}
         alt={alt}

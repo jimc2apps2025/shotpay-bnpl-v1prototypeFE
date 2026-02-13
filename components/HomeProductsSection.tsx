@@ -145,7 +145,7 @@ export default function HomeProductsSection() {
 							<ShieldLogo size="sm" className="h-5 w-5 flex-shrink-0" />
 							<div className="min-w-0">
 							  <div className="flex items-center space-x-1">
-								<span className="text-[10px] text-white font-bold">Pay in 6</span>
+								<span className="text-[10px] text-white font-bold">Pay in 4</span>
 								<span className="text-[9px] text-white/60">by</span>
 								<span className="text-[10px] text-white font-bold">ShotPay</span>
 							  </div>
@@ -153,8 +153,8 @@ export default function HomeProductsSection() {
 						  </div>
 
 						  <span className="text-xs font-bold text-[#4C773B] whitespace-nowrap">
-							${(product.price / 6).toFixed(2)}
-							<span className="text-[10px] font-normal text-white/70">/mo</span>
+							${(product.price / 4).toFixed(2)}
+							<span className="text-[10px] font-normal text-white/70">/payment</span>
 						  </span>
 						</div>
 					  </div>
