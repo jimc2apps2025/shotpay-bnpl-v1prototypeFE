@@ -131,7 +131,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 </div>
                 
                 {/* Payment Option */}
-                {product.category === 'ammunition' || product.category === 'target' ? (
+                {product.category === 'target' ? (
                   <button
                     onClick={handleSubscriptionClick}
                     className="w-full mb-4 sm:mb-6 p-3 sm:p-4 bg-[#0C0D0C] border border-[#4C773B]/30 rounded-lg hover:border-[#4C773B]/50 hover:bg-[#0C0D0C]/90 transition-all cursor-pointer text-left"

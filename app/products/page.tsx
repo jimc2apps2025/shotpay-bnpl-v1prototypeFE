@@ -11,7 +11,7 @@ import ShieldLogo from '@/components/ShieldLogo';
 
 export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'rifle' | 'pistol' | 'ammunition' | 'accessory' | 'target'>('all');
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'rifle' | 'pistol' | 'ammunition' | 'accessory' | 'target' | 'scope'>('all');
   const { addToCart } = useCart();
   const router = useRouter();
   const [showToast, setShowToast] = useState(false);
@@ -97,6 +97,36 @@ export default function ProductsPage() {
               >
                 Pistol
               </button>
+              <button
+                onClick={() => setSelectedCategory('ammunition')}
+                className={`px-3 md:px-4 py-2 rounded-lg transition-colors font-medium whitespace-nowrap text-sm md:text-base ${
+                  selectedCategory === 'ammunition'
+                    ? 'bg-[#4C773B] text-white'
+                    : 'bg-white text-[#0C0D0C] border border-[#192B17]/20 hover:bg-[#192B17]/5'
+                }`}
+              >
+                Ammunition
+              </button>
+              <button
+                onClick={() => setSelectedCategory('scope')}
+                className={`px-3 md:px-4 py-2 rounded-lg transition-colors font-medium whitespace-nowrap text-sm md:text-base ${
+                  selectedCategory === 'scope'
+                    ? 'bg-[#4C773B] text-white'
+                    : 'bg-white text-[#0C0D0C] border border-[#192B17]/20 hover:bg-[#192B17]/5'
+                }`}
+              >
+                Scope
+              </button>
+              <button
+                onClick={() => setSelectedCategory('accessory')}
+                className={`px-3 md:px-4 py-2 rounded-lg transition-colors font-medium whitespace-nowrap text-sm md:text-base ${
+                  selectedCategory === 'accessory'
+                    ? 'bg-[#4C773B] text-white'
+                    : 'bg-white text-[#0C0D0C] border border-[#192B17]/20 hover:bg-[#192B17]/5'
+                }`}
+              >
+                Accessory
+              </button>
             </div>
           </div>
         </div>
@@ -139,7 +169,7 @@ export default function ProductsPage() {
                   <div className="mt-auto">
                     <p className="text-xl font-bold text-[#4C773B] mb-2">${product.price.toFixed(2)}</p>
                     {/* Payment Option */}
-                    {product.category === 'ammunition' || product.category === 'target' ? (
+                    {product.category === 'target' ? (
                       <div 
                         onClick={(e) => handleSubscriptionClick(e, product)}
                         className="mb-3 p-2 bg-[#0C0D0C] border border-[#4C773B]/30 rounded hover:border-[#4C773B]/50 hover:bg-[#0C0D0C]/90 transition-all cursor-pointer"
