@@ -56,13 +56,13 @@ export default function HomeProductsSection() {
 		  <div className="flex items-end justify-between gap-4">
 			<div>
 			  <h2 className="text-2xl md:text-3xl font-bold text-[#0C0D0C] mb-2 uppercase">
-				Demo Products
+				ShotPay Demo
 			  </h2>
 			</div>
 
 			<Link
 			  href="/products"
-			  className="hidden md:inline-flex px-4 py-2 rounded-lg border border-[#192B17]/20 bg-white text-[#0C0D0C] hover:bg-[#192B17]/5 font-medium"
+			  className="inline-flex px-3 py-2 md:px-4 md:py-2 rounded-lg border border-[#192B17]/20 bg-white text-[#0C0D0C] hover:bg-[#192B17]/5 font-medium text-sm md:text-base"
 			>
 			  View all
 			</Link>
